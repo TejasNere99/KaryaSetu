@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="main">
+        <div class="navbar" id="navbar" style="position: sticky;">
+            <div class="logo navbar-opt" style="margin-bottom: 1rem; margin-left: 6rem;" >
+                <img src="../assets/logo1.PNG">    
+                <h2 style="color: #0333addb; font-weight: 700;">KaryaSetu</h2>
+            </div>
+            <div class="options" id="navbar-options" >
+                    <a href="index.html">Home</a>
+                    <a href="howItWorks.html">How it works</a>
+                    <a href="contactUs.html">Contact us</a>
+                    <a href="aboutUs.html">About us</a>
+            </div>
+            <div class="login-opt navbar-opt" style="margin-bottom: 1rem; margin-right: 5rem;">
+                <button id="login-btn" type="button" class="btn btn-primary btn-lg" >Login</button>
+            </div>
+            <div class="profile-opt navbar-opt" id="profile-section" style="display:none;">
+              <a href="profile.html" class="profile-link">
+                <div class="profile-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span id="profile-name"></span>
+              </a>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="box-1 box" >
+                <img src="../assets/logo1.PNG"> 
+                <h1 style="font-size: 3rem; color: rgb(255, 136, 0); font-weight: 900;">आत्मनिर्भर भारत का सेतु </h1>
+                <h1 style="font-size: 3rem; color: rgb(0, 170, 147); font-weight: 900;">कार्य सेतु</h1>
+                <div id="para" style="margin-top: 2rem; max-width: 550px; margin-left: 70px;">
+                    <p style="font-size: 1.4rem;">KaryaSetu connects skilled laborers with the people who need them simply, directly, and with trust.</p>
+                </div>
+                  
+            </div>
+            <div class="box-2 box">
+                <img src="../assets/first_img.JPG" " >
+            </div>
+        </div>
+        <div class="categories">
+            <h1>Explore Service Categories</h1>
+            <div class="categories-grid">
+                <a href="/category/plumber" class="category-card">
+                    <i class="fas fa-faucet"></i>
+                    <h3>Plumber</h3>
+                </a>
+                <a href="/category/electrician" class="category-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Electrician</h3>
+                </a>
+                <a href="/category/carpenter" class="category-card">
+                    <i class="fas fa-hammer"></i>
+                    <h3>Carpenter</h3>
+                </a>
+                <a href="/category/painter" class="category-card">
+                    <i class="fas fa-paint-roller"></i>
+                    <h3>Painter</h3>
+                </a>
+                <a href="/category/driver" class="category-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="70" height="80" viewBox="0 0 512 512" fill="#333" style="padding: 0.5rem;">
+                        <path d="M256 0C114.836 0 0 114.836 0 256s114.836 256 256 256 256-114.836 256-256S397.164 0 256 0zm0 48c114.875 0 208 93.125 208 208 0 9.254-.652 18.356-1.922 27.297L357.55 216.58c-21.379-17.905-49.066-28.58-78.55-28.58s-57.171 10.675-78.55 28.58L49.922 283.297C48.652 274.356 48 265.254 48 256c0-114.875 93.125-208 208-208zm0 416c-74.254 0-139.11-40.114-174.406-100.11l138.047-77.96c10.957 8.918 24.793 14.07 39.359 14.07s28.402-5.152 39.359-14.07l138.047 77.96C395.11 423.886 330.254 464 256 464z"/>
+                    </svg>
+                    <h3 style="margin-bottom: 1rem;">Driver</h3>
+                </a>
+            </div>
+        </div>
+        <div class="working">
+            <h1>How KaryaSetu Works</h1>
+            <div class="working-grid">
+                <div class="box">
+                    <div class="step-icon"><i class="fas fa-list-alt" style="color: blue;"></i></div>
+                    <h3>1. Choose a Category</h3>
+                    <p>Browse through various service categories to find the skill you need.</p>
+                </div>
+                <div class="box">
+                    <div class="step-icon"><i class="fas fa-user-check" style="color: orangered;"></i></div>
+                    <h3>2. Select a Laborer</h3>
+                    <p>View profiles, ratings, and experience to pick the best professional.</p>
+                </div>
+                <div class="box">
+                    <div class="step-icon"><i class="fas fa-handshake" style="color: greenyellow;"></i></div>
+                    <h3>3. Send Request</h3>
+                    <p>Send a request directly and get your work done efficiently.</p>
+                </div>
+            </div>
+        </div>
+        <div class="ready-box">
+            <h1>Ready to Get Started?</h1>
+            <p>Join KaryaSetu today and connect with skilled laborers in your area.</p>
+            <button id="worker-btn" type="button" class="btn btn-primary btn-lg">Join as a worker</button>
+            <button id="user-btn" type="button" class="btn btn-primary btn-lg">Find a worker</button>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-content">
+            <div class="box1">
+                <div class="logo navbar-opt" id="footer-logo" style=" margin-left: 0rem;" >
+                <img src="./assets/logo1.PNG">    
+                <h4 style="color: white; font-weight: 700;">KaryaSetu</h4>
+                </div>
+                <p style="color: rgba(255, 255, 255, 0.619);">India’s trusted platform connecting people with skilled laborers and ensuring quick, reliable services for every need</p>
+                <div class="icons">
+                    <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="box2 footer-box">
+                <h5 style="color: white;">For Users</h5>
+                <a href="userReg.html" id="footer-register">Register</a></li>
+                <a href="#" id="footer-categories">Explore categories</a></li>    
+            </div>
+            <div class="box3 footer-box">
+                <h5 style="color: white;">For Workers</h5>
+                <a href="workerLogin.html" id="footer-login">Login</a>
+                <a href="workerReg.html">Build Profile</a>
+            </div>
+            <div class="box4 footer-box">
+                <h5 style="color: white;">Support</h5>
+                <a href="contactUs.html" id="footer-contact">Contact Us</a>
+            </div>
+        </div>
+    </div>    
+    <script src="/frontend/public/js/app.js"></script>
+    <script>
+        window.onload = () => {
+            const isLoggedIn = localStorage.getItem("isUserLoggedIn");
+            const userName = localStorage.getItem("userName");
+
+            if (isLoggedIn === "true") {
+                document.getElementById("login-btn").style.display = "none";
+                document.getElementById("profile-section").style.display = "block";
+                document.getElementById("profile-name").innerText = userName;
+             }
+        };
+    </script>
+
+</body>
+</html>

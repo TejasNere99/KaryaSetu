@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Registration</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #43cea2, #185a9d);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      width: 350px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(135deg, #185a9d, #43cea2);
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Step 1: Mobile & OTP -->
+    <div id="step1">
+      <h2>Verify Mobile</h2>
+      <input type="text" id="mobile" placeholder="Enter Mobile Number" />
+      <input type="text" id="otp" placeholder="Enter OTP (1234)" />
+      <button onclick="verifyOtp()">Verify</button>
+    </div>
+
+    <!-- Step 2: User Registration Form -->
+    <div id="step2" class="hidden">
+      <h2>User Registration</h2>
+      <input type="text" id="name" placeholder="Full Name" />
+      <input type="number" id="age" placeholder="Age" />
+      <select id="gender">
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+      <input type="text" id="occupation" placeholder="Occupation" />
+      <textarea id="address" placeholder="Address"></textarea>
+      <!-- ✅ New Password Field -->
+      <input type="password" id="password" placeholder="Set Password" />
+      <button onclick="submitForm()">Register</button>
+    </div>
+  </div>
+
+  <script>
+    let verifiedMobile = "";
+    function verifyOtp() {
+      const mobile = document.getElementById("mobile").value;
+      const otp = document.getElementById("otp").value;
+      if (otp === "1234") {
+        verifiedMobile = mobile;
+        document.getElementById("step1").classList.add("hidden");
+        document.getElementById("step2").classList.remove("hidden");
+      } else {
+        alert("Invalid OTP. Please try again.");
+      }
+    }
+
+    function submitForm() {
+      const data = {
+        name: document.getElementById("name").value,
+        mobile: verifiedMobile, 
+        age: document.getElementById("age").value,
+        gender: document.getElementById("gender").value,
+        occupation: document.getElementById("occupation").value,
+        address: document.getElementById("address").value,
+        password: document.getElementById("password").value  // ✅ Added Password
+      };
+
+      fetch("/user-register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.text())
+      .then(msg => {
+        alert(msg);
+      })
+      .catch(err => {
+        console.error("Error:", err);
+        alert("Something went wrong!");
+      });
+    }
+  </script>
+</body>
+</html>

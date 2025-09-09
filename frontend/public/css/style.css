@@ -1,0 +1,308 @@
+body{
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  margin: 0;
+  color: black;
+}
+.main{
+    background-color: rgba(4, 109, 255, 0.074);
+    height: 2000px;
+    width: 100%;
+}
+.navbar{
+    padding: 0 2rem;
+    z-index: 1000;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    background-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.navbar.scrolled {
+  background-color: white; 
+  color: black; 
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+.logo{
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+}
+.logo img{
+   width: 3rem; 
+   height: 3rem;
+   margin-right: 1rem;
+   border-radius: 10px;
+}
+.navbar .options{
+    display: flex;
+}
+.navbar-opt{
+    padding: 1rem;
+}
+.navbar .options a{
+    color: black;
+    text-decoration: none;
+    align-content: center;
+    margin-right: 3rem;
+    padding: 1rem;
+}
+.main-content{
+    margin-top: 4rem;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    height: 100;
+    overflow: auto;
+}
+.box{
+    margin-right: 2rem;
+    line-height: 3rem;
+    /* background-color: rgba(110, 181, 253, 0.057); */
+}
+.box-1{
+    width: 45rem;
+    height: 25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.box-1 img{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+.box-1 img:hover{
+    box-shadow: 5px 5px 7px rgba(135, 146, 229, 0.744);
+    transition: 0.3s;
+
+}
+.box-2 img{
+    margin-right: 2.1rem;
+    width: 40rem;
+    border-radius: 10px;
+}
+.categories{
+    background-color: rgba(255, 255, 255, 0.463);
+    margin-top: 5rem;
+    padding: 5rem 0rem;
+    
+}
+.categories h1{
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+}
+.categories-grid{
+    display: flex;
+    justify-content: space-between;
+    /* padding-right: 3rem; */
+    margin: 0rem 6rem 0rem 5rem;
+
+}
+.categories-grid a{
+    margin-left: 1.75rem;
+    /* margin-right: 3rem; */
+    align-content: center;
+    text-align: center;
+    text-decoration: none;
+
+}
+.categories-grid a i{
+    font-size: 3rem;
+    color: black;
+    margin-bottom: 1rem;
+}
+.category-card{
+    height: 225px;
+    width: 225px;
+    /* margin-left: 3rem; */
+    /* margin-right: 2rem; */
+    background-color: white;
+    border-radius: 2rem;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.268);
+}
+.category-card:hover{
+    position: relative;
+    bottom: 10px;
+    box-shadow: 0px 0px 20px rgba(135, 146, 229, 0.744);
+    transition: position 0.9s ease, box-shadow 0.3s ease;
+}
+
+.working{
+    background-color: rgba(252, 242, 250, 0.296);
+    padding: 5rem 0rem;
+}
+.working h1{
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+}
+.working-grid{
+    display: flex;
+    justify-content: center;
+}
+.working-grid .box{
+    display:flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    justify-content: space-between;
+    align-content: space-between;
+    height: 280px;
+    width: 400px;
+    margin: 0rem 1rem 0rem 1rem;
+    background-color: white;
+    border-radius: 1rem;
+}
+.working-grid .step-icon{
+    display: flex;
+    justify-content: center;
+}
+.working-grid .box p{
+    text-align: center;
+    font-size: 1.2rem;
+    color: #333;
+    line-height: 2rem;
+}
+.working-grid .box h3{
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.1rem;
+    margin-top: 1rem;
+}
+.working-grid .box i{
+    font-size: 5rem;
+}
+.ready-box{
+    text-align: center;
+    padding: 5rem 0rem;
+    background-color: rgb(255, 255, 255);
+}
+.ready-box h1{
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+.ready-box p{
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+.ready-box button{
+    margin: 0 1rem;
+    padding: 0.5rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+.ready-box button:hover{
+    background-color: rgba(4, 109, 255, 0.8);
+    color: white;
+    transition: background-color 0.3s ease;
+}
+.footer{
+    background-color: black;
+    padding: 2rem;
+    text-align: center;
+    font-size: 1rem;
+    color: black;
+}
+.footer-content{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 3rem;
+    padding-right: 6rem;
+}
+.footer-content a{
+    color:  rgba(255, 255, 255, 0.619);
+    text-decoration: none;
+}
+.footer-content a:hover{
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.footer-content .box1{
+    width: 15rem;
+    display: flex;
+    flex-direction: column;
+}
+.footer-content p{
+    text-align: left;
+    margin-left: 1.25rem;
+}
+.footer-content .box1 .icons{
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+}
+.footer-content .box1 .icons a{
+    margin: 0 0.7rem;
+    color: rgba(255, 255, 255, 0.619);
+    font-size: 1.5rem;
+}
+.footer-content .box1 .icons a:hover{
+    color: white;
+    transition: color 0.3s ease;
+}
+.footer-box{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1.5rem;
+align-items: flex-start;
+}
+.footer-box a{
+    margin-top: 1.5rem;
+}
+.profile-opt {
+  margin-right: 3rem;
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.profile-link:hover {
+  color: #6a11cb; /* Violet shade */
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+#profile-name {
+  font-size: 1rem;
+  color: #222;
+}

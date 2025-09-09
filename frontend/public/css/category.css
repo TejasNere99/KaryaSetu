@@ -1,0 +1,114 @@
+/* ==== Global ==== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f0f4ff, #dbe6f6); /* lighter gradient */
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ==== Heading ==== */
+h1 {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  text-transform: capitalize;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+}
+
+/* ==== Worker Grid ==== */
+.worker-grid {
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  width: 90%;
+  max-width: 1200px;
+}
+
+/* ==== Card ==== */
+.card {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+}
+
+/* ==== Card Image ==== */
+.card-image {
+  width: 100%;
+  height: 180px;
+  background: #eef2f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.default-icon {
+  font-size: 4rem;
+  color: #666;
+}
+
+/* ==== Card Content ==== */
+.card-content {
+  padding: 20px;
+}
+
+.card-content h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+.card-content .subcategory {
+  margin: 5px 0 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #4a90e2;
+}
+
+.card-content p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.card-content strong {
+  color: #333;
+}
+.hire-btn{
+      /* width: 100%; */
+      width: 50%;
+      padding: 10px;
+      background: linear-gradient(135deg, #2575fc, #6a11cb);
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 0.3rem 0rem 1rem 6rem;
+  /* margin: 0rem 0rem 1rem 9rem;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  background-color: ; */
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= category %> - Workers</title>
+  <link rel="stylesheet" href="/category.css">
+</head>
+<body>
+  <h1><%= category %> Workers</h1>
+  <div class="worker-grid">
+    <% if(workers.length === 0){ %>
+      <p>No workers available in this category yet.</p>
+    <% } else { %>
+      <% workers.forEach(w => { %>
+        <div class="card">
+          <div class="card-image">
+            <% if(w.img && w.img !== ""){ %>
+              <img src="<%= w.img %>" alt="<%= w.name %>">
+            <% } else { %>
+              <div class="default-icon">👷</div>
+            <% } %>
+          </div>
+          <div class="card-content">
+            <h3><%= w.name %></h3>
+            <p class="subcategory"><%= w.subcategory %></p>
+            <p><strong>Mobile:</strong> <%= w.mobile %></p>
+            <p><strong>Age:</strong> <%= w.age %></p>
+            <p><strong>Experience:</strong> <%= w.experience %> years</p>
+            <p><strong>Address:</strong> <%= w.address %></p>
+          </div>
+          <form action="/submit2" method="post">
+            <a href="/category/<%= w.category%>/<%= w.id %>"></a>
+            <input type="hidden" name="workerId" value=" <%= w.id %> ">
+            <button type="submit" class="hire-btn">Hire Me</button>  
+          </form>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+</body>
+</html>

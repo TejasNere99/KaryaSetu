@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Karyasetu</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #fff5f5, #f5fff9);
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    header h1 {
+      font-size: 4rem;
+      color: #ff3e65;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    header p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin: 60px auto;
+      max-width: 1000px;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      width: 280px;
+      height: 300px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    .icon-wrapper {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+      font-size: 1.8rem;
+      color: #fff;
+    }
+
+    .blue {
+      background: #1e88e5;
+    }
+
+    .orange {
+      background: #fb8c00;
+    }
+
+    .green {
+      background: #43a047;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #222;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 25px;
+      line-height: 1.4;
+    }
+
+    button {
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            color: aliceblue;
+            width: 155px;
+            height: 37px;
+            border-color: aliceblue;
+            margin-top: 60px;
+            margin-bottom: 10px;
+            border-style: solid;
+             box-shadow: 0 4px 6px rgba(248, 4, 4, 0.1);
+      transition: all 0.3s ease;
+       font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+    footer {
+      text-align: center;
+      margin: 40px 0 20px;
+      font-size: 0.85rem;
+      color: #777;
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-r from-rose-50 via-orange-50 to-emerald-50 min-h-screen flex flex-col">
+
+  <header>
+    <h1>KaryaSetu</h1>
+    <p style="font-size: 1.5rem;">Your one-stop platform for trusted labor services and emergency help.</p>
+    <p style="font-size: small; margin-top: 1rem;">Connect laborers, households, and services in a seamless support ecosystem.</p>
+  </header>
+
+  <div class="container">
+
+    <div class="card">
+      <i class="fa-solid fa-user" style=" color: rgb(67, 134, 217); margin-top:25px; font-size: 2.5rem;"></i>
+      <h3>User Login</h3>
+      <p>Access your user dashboard and explore service categories.</p>
+      <button id="user" style="background-color: rgb(39, 88, 221); color: white;">Access portal ></button>
+    </div>
+    <div class="card">
+      <i class="fa-solid fa-user" style="color: rgb(246, 122, 12); margin-top:25px; font-size: 2.5rem;"></i>
+      <h3>Worker Login</h3>
+      <p>Access your worker dashboard and service details.</p>
+      <button id="worker" style="background-color: orangered;color: white;">
+                Access portal ></Access></button>
+    </div>
+  </div>
+  <script src="mainLogin.js"></script>
+</body>
+
+</html>

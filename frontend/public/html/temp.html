@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      padding: 15px;
+      text-align: left;
+    }
+
+    header a {
+      text-decoration: none;
+      font-size: 16px;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    h1 {
+      margin-top: 10px;
+      font-size: 36px;
+      color: #fff;
+    }
+
+    p.subtitle {
+      font-size: 18px;
+      color: #f1f1f1;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      padding: 40px;
+      width: 90%;
+      max-width: 1000px;
+    }
+
+    .form-section,
+    .info-section {
+      flex: 1;
+    }
+
+    .form-section h2 {
+      margin-bottom: 20px;
+      font-size: 22px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin: 10px 0 5px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #444;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: none;
+      height: 100px;
+    }
+
+    button {
+      background: linear-gradient(135deg, #66a6ff, #89f7fe);
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #567dff, #4de2ff);
+    }
+
+    .info-card {
+      background: #f9f9f9;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: left;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .info-card i {
+      font-size: 20px;
+      margin-right: 10px;
+      color: #66a6ff;
+    }
+
+    .info-card p {
+      margin: 5px 0 0;
+      color: #333;
+      font-size: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="#">🡐 Back to Home</a>
+  </header>
+
+  <h1>Contact Us</h1>
+  <p class="subtitle">Get in touch with our team</p>
+
+  <div class="container">
+    <!-- Form Section -->
+    <div class="form-section">
+      <h2>Send us a message</h2>
+      <form>
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Your Name">
+
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Your Email">
+
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" placeholder="Subject">
+
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Write your message..."></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+
+    <!-- Info Section -->
+    <div class="info-section">
+      <div class="info-card">
+        <p><i class="fas fa-envelope"></i>Email</p>
+        <p>support@campusconnect.com</p>
+      </div>
+      <div class="info-card">
+        <p><i class="fas fa-phone"></i>Phone</p>
+        <p>+91 9876543210</p>
+      </div>
+      <div class="info-card">
+        <p><i class="fas fa-location-dot"></i>Address</p>
+        <p>Kopargaon, Ahmednagar, India</p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
