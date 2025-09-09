@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Registration</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <title>Laborer Registration</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #43cea2, #185a9d);
+      background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -42,7 +41,7 @@
     button {
       width: 100%;
       padding: 10px;
-      background: linear-gradient(135deg, #185a9d, #43cea2);
+      background: linear-gradient(135deg, #2575fc, #6a11cb);
       border: none;
       border-radius: 6px;
       color: white;
@@ -70,24 +69,31 @@
       <button onclick="verifyOtp()">Verify</button>
     </div>
 
-    <!-- Step 2: User Registration Form -->
-    <div id="step2" class="hidden">
-      <h2>User Registration</h2>
-      <input type="text" id="name" placeholder="Full Name" />
-      <input type="number" id="age" placeholder="Age" />
-      <select id="gender">
-        <option value="">Select Gender</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Other">Other</option>
+    <!-- Step 2: Registration Form -->
+     <!-- <form action="/submit" method="post"> -->
+        <div id="step2" class="hidden">
+      <h2>Laborer Registration</h2>
+      <input type="text" id="name" placeholder="Laborer Name" />
+      <select id="category">
+        <option value="">Select Category</option>
+        <option value="Plumber">Plumber</option>
+        <option value="Electrician">Electrician</option>
+        <option value="Carpenter">Carpenter</option>
+        <option value="Painter">Painter</option>
+        <option value="Driver">Driver</option>
       </select>
-      <input type="text" id="occupation" placeholder="Occupation" />
+      <input type="number" id="age" placeholder="Age" />
+      <input type="text" id="experience" placeholder="Experience (in years)" />
+      <input type="text" id="subcategory" placeholder="Sub-Category of Work" />
       <textarea id="address" placeholder="Address"></textarea>
+      
       <!-- ✅ New Password Field -->
       <input type="password" id="password" placeholder="Set Password" />
+
       <button onclick="submitForm()">Register</button>
     </div>
   </div>
+     <!-- </form> -->
 
   <script>
     let verifiedMobile = "";
@@ -106,27 +112,27 @@
     function submitForm() {
       const data = {
         name: document.getElementById("name").value,
-        mobile: verifiedMobile, 
+        mobile: verifiedMobile,
+        category: document.getElementById("category").value,
         age: document.getElementById("age").value,
-        gender: document.getElementById("gender").value,
-        occupation: document.getElementById("occupation").value,
+        experience: document.getElementById("experience").value,
+        subcategory: document.getElementById("subcategory").value,
         address: document.getElementById("address").value,
-        password: document.getElementById("password").value  // ✅ Added Password
+        password: document.getElementById("password").value
       };
 
-      fetch("/user-register", {
+      fetch("/worker-register", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify(data)
       })
       .then(res => res.text())
       .then(msg => {
-        alert(msg);
+        alert(msg);  // Backend ka response
       })
-      .catch(err => {
-        console.error("Error:", err);
-        alert("Something went wrong!");
-      });
+      .catch(err => console.error("Error:", err));
     }
   </script>
 </body>

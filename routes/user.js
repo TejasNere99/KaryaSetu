@@ -2,15 +2,15 @@
 // const express = require("express");
 // const fs = require("fs");
 // const user = express.Router();
-// user.use(express.static(path.join(__dirname, "../../frontend/public")));
+// user.use(express.static(path.join(__dirname, "working")));
 
 // user.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname,'../../frontend/public/html/index.html'));
+//   res.sendFile(path.join(__dirname,'./working/index.html'));
 // });
 
 // user.get("/category/:name", (req, res) => {
 //   const category = req.params.name; // url se category milegi (plumber/electrician)
-//   fs.readFile(path.join(__dirname, "../models/worker.json"), "utf8", (err, data) => {
+//   fs.readFile("worker.json", "utf8", (err, data) => {
 //     if (err) return res.status(500).send("Error reading file");
 
 //     let workers = [];

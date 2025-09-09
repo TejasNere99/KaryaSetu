@@ -3,12 +3,12 @@
 // const fs = require("fs");
 // const host = express.Router();
 
-// host.use(express.static(path.join(__dirname, "../../frontend/public")));
+// host.use(express.static(path.join(__dirname, "\KaryaSetu\working")));
 
 // // 📌 User Registration → Data save in users.json
 // host.post("/user-register", (req, res) => {
 //   const newUser = req.body;
-//   const fileName = path.join(__dirname, "../models/users.json");
+//   const fileName = "users.json";
 
 //   fs.readFile(fileName, "utf8", (err, data) => {
 //     let users = [];
@@ -39,7 +39,7 @@
 // host.post("/login", (req, res) => {
 //   const { mobile, password } = req.body;
 
-//   fs.readFile(path.join(__dirname, "../models/worker.json"), "utf8", (err, data) => {
+//   fs.readFile("worker.json", "utf8", (err, data) => {
 //     if (err) return res.status(500).send("Error reading user file");
 
 //     let users = [];
@@ -66,7 +66,7 @@
 // host.post("/user-login", (req, res) => {
 //   const { mobile, password } = req.body;
 
-//   fs.readFile(path.join(__dirname, "../models/users.json"), "utf8", (err, data) => {
+//   fs.readFile("users.json", "utf8", (err, data) => {
 //     if (err) return res.status(500).send("Error reading user file");
 
 //     let users = [];
@@ -94,7 +94,7 @@
 //   const newWorker = req.body;
 //   console.log("Worker Data:", newWorker);
 
-//   const fileName = path.join(__dirname, "../models/worker.json");
+//   const fileName = path.join(__dirname, "worker.json");
 
 //   fs.readFile(fileName, "utf8", (err, data) => {
 //     let workers = [];

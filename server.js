@@ -10,20 +10,20 @@ const PORT = 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // JSON bhi handle karega
-app.use(express.static(path.join(__dirname, "frontend/public/css")));
+app.use(express.static(path.join(__dirname, "working")));
 
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "backend/views"));
+app.set("views", path.join(__dirname, "views"));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend/public/html/index.html"));
+  res.sendFile(path.join(__dirname,'./working/index.html'));
 });
 // 📌 Worker Registration → Data save in worker.json
 app.post("/worker-register", (req, res) => {
   const newWorker = req.body;
   console.log("Worker Data:", newWorker);
 
-  const fileName = path.join(__dirname, "backend/models/worker.json");
+  const fileName = path.join(__dirname, "worker.json");
 
   fs.readFile(fileName, "utf8", (err, data) => {
     let workers = [];
@@ -53,7 +53,7 @@ app.post("/worker-register", (req, res) => {
 // 📌 User Registration → Data save in users.json
 app.post("/user-register", (req, res) => {
   const newUser = req.body;
-  const fileName = path.join(__dirname, "backend/models/users.json");
+  const fileName = "users.json";
 
   fs.readFile(fileName, "utf8", (err, data) => {
     let users = [];
@@ -88,7 +88,7 @@ app.get("/submit2", (req, res) =>{
 
 app.get("/category/:name", (req, res) => {
   const category = req.params.name; // url se category milegi (plumber/electrician)
-  fs.readFile(path.join(__dirname, "backend/models/worker.json"), "utf8", (err, data) => {
+  fs.readFile("worker.json", "utf8", (err, data) => {
     if (err) return res.status(500).send("Error reading file");
 
     let workers = [];
@@ -111,7 +111,7 @@ app.get("/category/:name", (req, res) => {
 app.post("/login", (req, res) => {
   const { mobile, password } = req.body;
 
-  fs.readFile(path.join(__dirname, "backend/models/worker.json"), "utf8", (err, data) => {
+  fs.readFile("worker.json", "utf8", (err, data) => {
     if (err) return res.status(500).send("Error reading user file");
 
     let users = [];
@@ -139,7 +139,7 @@ app.post("/login", (req, res) => {
 app.post("/user-login", (req, res) => {
   const { mobile, password } = req.body;
 
-  fs.readFile(path.join(__dirname, "backend/models/users.json"), "utf8", (err, data) => {
+  fs.readFile("users.json", "utf8", (err, data) => {
     if (err) return res.status(500).send("Error reading user file");
 
     let users = [];
