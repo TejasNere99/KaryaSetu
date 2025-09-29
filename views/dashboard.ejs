@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= user.name %> - Dashboard</title>
+  <link rel="stylesheet" href="/Profile/user profile/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <h1>KaryaSetu</h1>
+    <div class="profile-icon" title="<%= user.name %>"><%= (user.name || 'U').trim().charAt(0).toUpperCase() %></div>
+  </div>
+
+  <!-- Dashboard -->
+  <div class="dashboard" id="dashboard" style="display:flex;">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <ul>
+        <li class="active" onclick="showSection('requests', event)">Requests Sent</li>
+        <li onclick="showSection('chats', event)">Chats</li>
+        <li onclick="showSection('notifications', event)">Notifications</li>
+        <li onclick="showSection('settings', event)">Settings</li>
+        <li onclick="logout()">Logout</li>
+      </ul>
+    </div>
+
+    <!-- Content -->
+    <div class="content" id="content">
+      <!-- Default section -->
+      <h2>Requests Sent</h2>
+      <div class="card">Hello <%= user.name %>! Your recent request for a Mason is Pending.</div>
+      <div class="card">Example: Carpenter request Status is Accepted.</div>
+    </div>
+  </div>
+
+  <script>
+    const content = document.getElementById("content");
+    const sidebarItems = document.querySelectorAll(".sidebar ul li");
+
+    function showSection(section, event) {
+      sidebarItems.forEach(item => item.classList.remove("active"));
+      event.target.classList.add("active");
+
+      if (section === "requests") {
+        content.innerHTML = `
+          <h2>Requests Sent</h2>
+          <div class="card">Hello <%= user.name %>! Your recent request for a Mason is Pending.</div>
+          <div class="card">Example: Carpenter request Status is Accepted.</div>
+          <div class="card">Example: Painter request Status is Rejected.</div>
+        `;
+      }
+
+      if (section === "chats") {
+        content.innerHTML = `
+          <h2>Chats</h2>
+          <div class="chat-container">
+            <div class="chat-list">
+              <div onclick="openChat('Ram')">Ram</div>
+              <div onclick="openChat('Shyam')">Shyam</div>
+            </div>
+            <div class="chat-window">
+              <div class="messages" id="messages">
+                <div class="msg received">Hello!</div>
+                <div class="msg sent">Hi, how are you?</div>
+              </div>
+              <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Type a message...">
+                <button onclick="sendMessage()">Send</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      if (section === "notifications") {
+        content.innerHTML = `
+          <h2>Notifications</h2>
+          <div class="card">Your request was accepted by Shyam</div>
+          <div class="card">Reminder: Review your last service</div>
+        `;
+      }
+
+      if (section === "settings") {
+        content.innerHTML = `
+          <h2>Settings</h2>
+          <form onsubmit="event.preventDefault(); alert('Saved!');">
+            <label>Name:</label><br>
+            <input type="text" value="<%= user.name %>"><br><br>
+            <label>Age:</label><br>
+            <input type="number" value="<%= user.age %>"><br><br>
+            <label>Address:</label><br>
+            <input type="text" value="<%= user.address %>"><br><br>
+            <label>Category of Work:</label><br>
+            <input type="text" value="Customer"><br><br>
+            <button type="submit">Save</button>
+          </form>
+        `;
+      }
+    }
+
+    function logout() {
+      try {
+        localStorage.setItem("isUserLoggedIn", "false");
+        localStorage.removeItem("userName");
+        localStorage.removeItem("userId");
+      } catch (e) {}
+      window.location.href = "/";
+    }
+
+    function sendMessage() {
+      const input = document.getElementById("chatInput");
+      const msgBox = document.getElementById("messages");
+      if (input && msgBox && input.value.trim() !== "") {
+        const msg = document.createElement("div");
+        msg.classList.add("msg", "sent");
+        msg.innerText = input.value;
+        msgBox.appendChild(msg);
+        input.value = "";
+        msgBox.scrollTop = msgBox.scrollHeight;
+      }
+    }
+
+    function openChat(worker) {
+      alert("Opening chat with " + worker);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .debug-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        .debug-section h3 { margin-top: 0; color: #333; }
+        button { padding: 10px 15px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 3px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>KaryaSetu Debug Page</h1>
+    
+    <div class="debug-section">
+        <h3>Local Storage Status</h3>
+        <button onclick="checkLocalStorage()">Check Local Storage</button>
+        <div id="localStorageInfo"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h3>Server Users Data</h3>
+        <button onclick="checkServerUsers()">Check Server Users</button>
+        <div id="serverUsersInfo"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h3>Test Profile Link</h3>
+        <button onclick="testProfileLink()">Test Profile Link</button>
+        <div id="profileTestInfo"></div>
+    </div>
+    
+    <div class="debug-section">
+        <h3>Login Test</h3>
+        <input type="text" id="testMobile" placeholder="Mobile" value="9272556195">
+        <input type="password" id="testPassword" placeholder="Password" value="1234">
+        <button onclick="testLogin()">Test Login</button>
+        <div id="loginTestInfo"></div>
+    </div>
+
+    <script>
+        function checkLocalStorage() {
+            const isLoggedIn = localStorage.getItem("isUserLoggedIn");
+            const userName = localStorage.getItem("userName");
+            const userId = localStorage.getItem("userId");
+            
+            document.getElementById("localStorageInfo").innerHTML = `
+                <pre>
+isUserLoggedIn: ${isLoggedIn} (${typeof isLoggedIn})
+userName: ${userName} (${typeof userName})
+userId: ${userId} (${typeof userId})
+                </pre>
+            `;
+        }
+        
+        async function checkServerUsers() {
+            try {
+                const response = await fetch("/debug/users");
+                const data = await response.json();
+                document.getElementById("serverUsersInfo").innerHTML = `
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                document.getElementById("serverUsersInfo").innerHTML = `
+                    <pre>Error: ${error.message}</pre>
+                `;
+            }
+        }
+        
+        function testProfileLink() {
+            const userId = localStorage.getItem("userId");
+            const profileLink = `/user/${userId}`;
+            
+            document.getElementById("profileTestInfo").innerHTML = `
+                <pre>
+Profile Link: ${profileLink}
+Will redirect to: ${window.location.origin}${profileLink}
+                </pre>
+                <button onclick="window.open('${profileLink}', '_blank')">Open Profile Link</button>
+            `;
+        }
+        
+        async function testLogin() {
+            const mobile = document.getElementById("testMobile").value;
+            const password = document.getElementById("testPassword").value;
+            
+            try {
+                const response = await fetch("/user-login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ mobile, password })
+                });
+                
+                const data = await response.json();
+                document.getElementById("loginTestInfo").innerHTML = `
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+                
+                if (data.success) {
+                    // Store in localStorage like the real login
+                    localStorage.setItem("isUserLoggedIn", "true");
+                    localStorage.setItem("userName", data.user.name || data.user.mobile);
+                    localStorage.setItem("userId", data.user.id);
+                    alert("Login successful! Check local storage now.");
+                }
+            } catch (error) {
+                document.getElementById("loginTestInfo").innerHTML = `
+                    <pre>Error: ${error.message}</pre>
+                `;
+            }
+        }
+        
+        // Auto-check on page load
+        window.onload = function() {
+            checkLocalStorage();
+            checkServerUsers();
+        };
+    </script>
+</body>
+</html>

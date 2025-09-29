@@ -103,30 +103,45 @@
     }
 
     function submitForm() {
-      const data = {
-        name: document.getElementById("name").value,
-        mobile: verifiedMobile, 
-        age: document.getElementById("age").value,
-        gender: document.getElementById("gender").value,
-        occupation: document.getElementById("occupation").value,
-        address: document.getElementById("address").value,
-        password: document.getElementById("password").value  // ✅ Added Password
-      };
+  const name = document.getElementById("name").value.trim();
+  const age = document.getElementById("age").value.trim();
+  const gender = document.getElementById("gender").value.trim();
+  const occupation = document.getElementById("occupation").value.trim();
+  const address = document.getElementById("address").value.trim();
+  const password = document.getElementById("password").value.trim();
 
-      fetch("/user-register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      })
-      .then(res => res.text())
-      .then(msg => {
-        alert(msg);
-      })
-      .catch(err => {
-        console.error("Error:", err);
-        alert("Something went wrong!");
-      });
-    }
+  // ✅ Manual Validation
+  if (!name || !age || !gender || !occupation || !address || !password) {
+    alert("❌ All fields are required!");
+    return; // stop here
+  }
+
+  const data = {
+    name,
+    mobile: verifiedMobile,
+    age,
+    gender,
+    occupation,
+    address,
+    password
+  };
+
+  fetch("/user-register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.text())
+  .then(msg => {
+    alert(msg);
+  })
+  .catch(err => {
+    console.error("Error:", err);
+    alert("Something went wrong!");
+  });
+  window.location.href = "/userLogin.html";
+}
+
   </script>
 </body>
 </html>

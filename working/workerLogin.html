@@ -84,10 +84,12 @@ async function login() {
   if (data.success) {
     alert("✅ Login Successful");
     console.log("Logged in:", data.user);
-    localStorage.setItem("isUserLoggedIn", "true");
-    localStorage.setItem("userName", data.user.name || data.user.mobile);
-    // Redirect kar dashboard par
-    window.location.href = "index.html";  // yaha apna dashboard path dalna
+    // Mark worker login separately
+    localStorage.setItem("isWorkerLoggedIn", "true");
+    localStorage.setItem("workerName", data.user.name || data.user.mobile);
+    localStorage.setItem("workerId", data.user.id);
+    // Redirect to worker dashboard
+    window.location.href = "index.html";
   } else {
     alert("❌ Invalid Mobile or Password");
   }

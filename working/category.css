@@ -59,9 +59,10 @@ h1 {
 }
 
 .card-image img {
-  width: 100%;
+  width: 70%;
   height: 100%;
-  object-fit: cover;
+  border-radius: 50%;
+  background-position: cover;
 }
 
 .default-icon {

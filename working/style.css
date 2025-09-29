@@ -301,8 +301,39 @@ align-items: flex-start;
   transform: scale(1.1);
   box-shadow: 0 6px 15px rgba(0,0,0,0.3);
 }
-
+#profile-section{
+    /* width: 20rem; */
+    display: flex;
+    justify-content: flex-end;
+    /* align-items: center; */
+    gap: 10px;
+}
 #profile-name {
   font-size: 1rem;
   color: #222;
+}
+/* Navbar language selector */
+#langSwitcher {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #f8f9fa; /* light bg like Bootstrap */
+    color: #333;
+    font-size: 0.9rem;
+    margin-left: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Hover effect */
+#langSwitcher:hover {
+    border-color: #007bff; /* Bootstrap primary blue */
+    background-color: #e9ecef; /* light hover bg */
+}
+
+/* Focus effect */
+#langSwitcher:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0,123,255,0.5);
 }

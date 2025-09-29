@@ -84,11 +84,15 @@ async function login() {
   if (data.success) {
     alert("✅ Login Successful");
     console.log("Logged in:", data.user);
+    console.log("User ID:", data.user.id, "Type:", typeof data.user.id);
     // User ka naam ya number localStorage me save kar
     localStorage.setItem("isUserLoggedIn", "true");
     localStorage.setItem("userName", data.user.name || data.user.mobile);
-    // Redirect kar dashboard par
-    window.location.href = "index.html";  // yaha apna dashboard path dalna
+    localStorage.setItem("userId", data.user.id);
+    console.log("✅ Stored in localStorage - isUserLoggedIn:", localStorage.getItem("isUserLoggedIn"));
+    console.log("✅ Stored in localStorage - userName:", localStorage.getItem("userName"));
+    console.log("✅ Stored in localStorage - userId:", localStorage.getItem("userId"));
+    window.location.href = "/"; // ye tera express route "/" ko hit karega
   } else {
     alert("❌ Invalid Mobile or Password");
   }

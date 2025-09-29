@@ -96,44 +96,69 @@
      <!-- </form> -->
 
   <script>
-    let verifiedMobile = "";
-    function verifyOtp() {
-      const mobile = document.getElementById("mobile").value;
-      const otp = document.getElementById("otp").value;
-      if (otp === "1234") {
-        verifiedMobile = mobile;
-        document.getElementById("step1").classList.add("hidden");
-        document.getElementById("step2").classList.remove("hidden");
-      } else {
-        alert("Invalid OTP. Please try again.");
-      }
+  let verifiedMobile = "";
+
+  function verifyOtp() {
+    const mobile = document.getElementById("mobile").value.trim();
+    const otp = document.getElementById("otp").value.trim();
+
+    if (!mobile) {
+      alert("❌ Please enter mobile number");
+      return;
     }
 
-    function submitForm() {
-      const data = {
-        name: document.getElementById("name").value,
-        mobile: verifiedMobile,
-        category: document.getElementById("category").value,
-        age: document.getElementById("age").value,
-        experience: document.getElementById("experience").value,
-        subcategory: document.getElementById("subcategory").value,
-        address: document.getElementById("address").value,
-        password: document.getElementById("password").value
-      };
-
-      fetch("/worker-register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      })
-      .then(res => res.text())
-      .then(msg => {
-        alert(msg);  // Backend ka response
-      })
-      .catch(err => console.error("Error:", err));
+    if (otp === "1234") {
+      verifiedMobile = mobile;
+      document.getElementById("step1").classList.add("hidden");
+      document.getElementById("step2").classList.remove("hidden");
+    } else {
+      alert("Invalid OTP. Please try again.");
     }
-  </script>
+  }
+
+  function submitForm() {
+    const name = document.getElementById("name").value.trim();
+    const category = document.getElementById("category").value.trim();
+    const age = document.getElementById("age").value.trim();
+    const experience = document.getElementById("experience").value.trim();
+    const subcategory = document.getElementById("subcategory").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    // ✅ Manual validation
+    if (!name || !category || !age || !experience || !subcategory || !address || !password) {
+      alert("❌ All fields are required!");
+      return;
+    }
+    if (!verifiedMobile) {
+      alert("❌ Please verify mobile number first!");
+      return;
+    }
+
+    const data = {
+      name,
+      mobile: verifiedMobile,
+      category,
+      age,
+      experience,
+      subcategory,
+      address,
+      password
+    };
+
+    fetch("/worker-register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.text())
+    .then(msg => {
+      alert(msg);  // Backend ka response
+    })
+    .catch(err => console.error("Error:", err));
+    window.location.href = "/workerLogin.html";
+  }
+</script>
+
 </body>
 </html>

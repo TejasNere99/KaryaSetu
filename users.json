@@ -1,20 +1,22 @@
 [
   {
-    "name": "NERE TEJAS VIKAS",
-    "mobile": "1020304060",
-    "age": "19",
+    "name": "Tejas Vikas Nere",
+    "mobile": "9272556195",
+    "age": "25",
     "gender": "Male",
-    "occupation": "sss",
-    "address": "Jijamata Udyan , shani Mandir",
-    "password": "Tejas1209111"
+    "occupation": "student",
+    "address": "Jijamata Udyan, Shanimandir, Kopargoan",
+    "password": "1234",
+    "id": 1
   },
   {
-    "name": "Swapnali Sunil Gawali",
+    "name": "Vikas Babanrao Nere",
     "mobile": "8888074775",
-    "age": "34",
-    "gender": "Female",
-    "occupation": "Professor",
-    "address": "abc",
-    "password": "omsai"
-  }  
+    "age": "48",
+    "gender": "Male",
+    "occupation": "Tailor",
+    "address": "Jijamata Udyan, Shanimandir, Kopargoan",
+    "password": "1234",
+    "id": 2
+  }
 ]
