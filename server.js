@@ -59,7 +59,7 @@ app.get("/user/:id", (req, res) => {
 
     if (foundUser) {
       console.log("✅ User Found:", foundUser);
-      res.render("dashboard", { user: foundUser }); // EJS render karega
+      res.render("user-dashboard", { user: foundUser }); // EJS render karega
     } else {
       console.log("❌ User not found for ID:", userId);
       res.status(404).send("User not found");
