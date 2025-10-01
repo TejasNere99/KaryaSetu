@@ -24,12 +24,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 let logOutBtn = document.getElementById("logout-btn");
-logOutBtn.addEventListener("click", function() {
-    localStorage.setItem("isUserLoggedIn", "false");
-    localStorage.removeItem("userName");
-    localStorage.removeItem("userId");
-    window.location.href = "index.html";    
-});
+if (logOutBtn) {
+    logOutBtn.addEventListener("click", function() {
+        localStorage.setItem("isUserLoggedIn", "false");
+        localStorage.removeItem("userName");
+        localStorage.removeItem("userId");
+        // also clear worker session keys
+        localStorage.setItem("isWorkerLoggedIn", "false");
+        localStorage.removeItem("workerName");
+        localStorage.removeItem("workerId");
+        window.location.href = "index.html";    
+    });
+}
 
 // Language Translation using local JSON
 const langSel = document.getElementById("langSwitcher");

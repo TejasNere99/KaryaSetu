@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "category": "Plumber",
+    "name": "Sumit Rakhpasare",
+    "age": 33,
+    "mobile": "9834697253",
+    "experience": 1.5,
+    "address": "Jijamata udyn kopargoan",
+    "subcategory": "Instalation Of Water Pipe",
+    "password": "sumit",
+    "img": "https://randomuser.me/api/portraits/men/1.jpg"
+  }
+]

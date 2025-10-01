@@ -24,8 +24,60 @@
     </div>
 
     <div class="content" id="content">
-      <h2>My Jobs</h2>
-      <div class="card">Welcome <%= worker.name %>! No active jobs yet.</div>
+      <!-- Jobs section -->
+      <div id="jobs-section" style="display:block;">
+        <h2>My Jobs</h2>
+        <div class="card">Welcome <%= worker.name %>! No active jobs yet.</div>
+        <div class="card">Tip: Keep your profile updated to get more requests.</div>
+      </div>
+
+      <!-- Chats section -->
+      <div id="chats-section" style="display:none;">
+        <h2>Chats</h2>
+        <h3>Your Requests</h3>
+        <ul>
+          <% requests.forEach(req => { %>
+            <li>
+              Request from User <%= req.userId %>
+              <a href="/chat/<%= req.userId %>/<%= worker.id %>/worker" target="_blank">Open Chat</a>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+
+      <!-- Notifications section -->
+      <div id="notifications-section" style="display:none;">
+        <h2>Notifications</h2>
+        <div class="card">You received a new booking request.</div>
+        <div class="card">Reminder: Verify your phone number.</div>
+      </div>
+
+      <!-- Profile section -->
+      <div id="profile-section" style="display:none;">
+        <h2>Profile</h2>
+        <div class="card">
+          <b>Name:</b> <%= worker.name %><br>
+          <b>Mobile:</b> <%= worker.mobile %><br>
+          <b>Category:</b> <%= worker.category %><br>
+          <b>Subcategory:</b> <%= worker.subcategory %><br>
+          <b>Experience (years):</b> <%= worker.experience %><br>
+          <b>Address:</b> <%= worker.address %><br>
+        </div>
+        <h3>Edit Profile</h3>
+        <form onsubmit="event.preventDefault(); alert('Saved!');">
+          <label>Name:</label><br>
+          <input type="text" value="<%= worker.name %>"><br><br>
+          <label>Category:</label><br>
+          <input type="text" value="<%= worker.category %>"><br><br>
+          <label>Subcategory:</label><br>
+          <input type="text" value="<%= worker.subcategory %>"><br><br>
+          <label>Experience (years):</label><br>
+          <input type="number" step="0.5" value="<%= worker.experience %>"><br><br>
+          <label>Address:</label><br>
+          <input type="text" value="<%= worker.address %>"><br><br>
+          <button type="submit">Save</button>
+        </form>
+      </div>
     </div>
   </div>
 
@@ -37,71 +89,14 @@
       sidebarItems.forEach(item => item.classList.remove("active"));
       event.target.classList.add("active");
 
-      if (section === "jobs") {
-        content.innerHTML = `
-          <h2>My Jobs</h2>
-          <div class="card">Welcome <%= worker.name %>! No active jobs yet.</div>
-          <div class="card">Tip: Keep your profile updated to get more requests.</div>
-        `;
-      }
+      // Hide all sections
+      document.getElementById("jobs-section").style.display = "none";
+      document.getElementById("chats-section").style.display = "none";
+      document.getElementById("notifications-section").style.display = "none";
+      document.getElementById("profile-section").style.display = "none";
 
-      if (section === "chats") {
-        content.innerHTML = `
-          <h2>Chats</h2>
-          <div class="chat-container">
-            <div class="chat-list">
-              <div onclick="openChat('Customer A')">Customer A</div>
-              <div onclick="openChat('Customer B')">Customer B</div>
-            </div>
-            <div class="chat-window">
-              <div class="messages" id="messages">
-                <div class="msg received">Hi, are you available tomorrow?</div>
-                <div class="msg sent">Yes, I am.</div>
-              </div>
-              <div class="chat-input">
-                <input type="text" id="chatInput" placeholder="Type a message...">
-                <button onclick="sendMessage()">Send</button>
-              </div>
-            </div>
-          </div>
-        `;
-      }
-
-      if (section === "notifications") {
-        content.innerHTML = `
-          <h2>Notifications</h2>
-          <div class="card">You received a new booking request.</div>
-          <div class="card">Reminder: Verify your phone number.</div>
-        `;
-      }
-
-      if (section === "profile") {
-        content.innerHTML = `
-          <h2>Profile</h2>
-          <div class="card">
-            <b>Name:</b> <%= worker.name %><br>
-            <b>Mobile:</b> <%= worker.mobile %><br>
-            <b>Category:</b> <%= worker.category %><br>
-            <b>Subcategory:</b> <%= worker.subcategory %><br>
-            <b>Experience (years):</b> <%= worker.experience %><br>
-            <b>Address:</b> <%= worker.address %><br>
-          </div>
-          <h3>Edit Profile</h3>
-          <form onsubmit="event.preventDefault(); alert('Saved!');">
-            <label>Name:</label><br>
-            <input type="text" value="<%= worker.name %>"><br><br>
-            <label>Category:</label><br>
-            <input type="text" value="<%= worker.category %>"><br><br>
-            <label>Subcategory:</label><br>
-            <input type="text" value="<%= worker.subcategory %>"><br><br>
-            <label>Experience (years):</label><br>
-            <input type="number" step="0.5" value="<%= worker.experience %>"><br><br>
-            <label>Address:</label><br>
-            <input type="text" value="<%= worker.address %>"><br><br>
-            <button type="submit">Save</button>
-          </form>
-        `;
-      }
+      // Show selected section
+      document.getElementById(section + "-section").style.display = "block";
     }
 
     function logout() {

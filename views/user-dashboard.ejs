@@ -28,10 +28,56 @@
 
     <!-- Content -->
     <div class="content" id="content">
-      <!-- Default section -->
-      <h2>Requests Sent</h2>
-      <div class="card">Hello <%= user.name %>! Your recent request for a Mason is Pending.</div>
-      <div class="card">Example: Carpenter request Status is Accepted.</div>
+      <!-- Requests section -->
+      <div id="requests-section" style="display:block;">
+        <h2>Requests Sent</h2>
+        <div class="card">Hello <%= user.name %>! Your recent request for a Mason is Pending.</div>
+        <div class="card">Example: Carpenter request Status is Accepted.</div>
+        <div class="card">Example: Painter request Status is Rejected.</div>
+      </div>
+
+      <!-- Chats section -->
+      <div id="chats-section" style="display:none;">
+        <h2>Chats</h2>
+        <h3>Available Workers</h3>
+        <ul>
+          <% workers.forEach(worker => { %>
+            <li>
+              <img src="<%= worker.img %>" width="50" alt="<%= worker.name %>">
+              <b><%= worker.name %></b> - <%= worker.category %>
+              <form action="/sendRequest" method="POST" style="display:inline;">
+                <input type="hidden" name="userId" value="<%= user.id %>">
+                <input type="hidden" name="workerId" value="<%= worker.id %>">
+                <button type="submit">Send Request</button>
+              </form>
+              <a href="/chat/<%= user.id %>/<%= worker.id %>/user" target="_blank">Open Chat</a>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+
+      <!-- Notifications section -->
+      <div id="notifications-section" style="display:none;">
+        <h2>Notifications</h2>
+        <div class="card">Your request was accepted by Shyam</div>
+        <div class="card">Reminder: Review your last service</div>
+      </div>
+
+      <!-- Settings section -->
+      <div id="settings-section" style="display:none;">
+        <h2>Settings</h2>
+        <form onsubmit="event.preventDefault(); alert('Saved!');">
+          <label>Name:</label><br>
+          <input type="text" value="<%= user.name %>"><br><br>
+          <label>Age:</label><br>
+          <input type="number" value="<%= user.age %>"><br><br>
+          <label>Address:</label><br>
+          <input type="text" value="<%= user.address %>"><br><br>
+          <label>Category of Work:</label><br>
+          <input type="text" value="Customer"><br><br>
+          <button type="submit">Save</button>
+        </form>
+      </div>
     </div>
   </div>
 
@@ -43,61 +89,14 @@
       sidebarItems.forEach(item => item.classList.remove("active"));
       event.target.classList.add("active");
 
-      if (section === "requests") {
-        content.innerHTML = `
-          <h2>Requests Sent</h2>
-          <div class="card">Hello <%= user.name %>! Your recent request for a Mason is Pending.</div>
-          <div class="card">Example: Carpenter request Status is Accepted.</div>
-          <div class="card">Example: Painter request Status is Rejected.</div>
-        `;
-      }
+      // Hide all sections
+      document.getElementById("requests-section").style.display = "none";
+      document.getElementById("chats-section").style.display = "none";
+      document.getElementById("notifications-section").style.display = "none";
+      document.getElementById("settings-section").style.display = "none";
 
-      if (section === "chats") {
-        content.innerHTML = `
-          <h2>Chats</h2>
-          <div class="chat-container">
-            <div class="chat-list">
-              <div onclick="openChat('Ram')">Ram</div>
-              <div onclick="openChat('Shyam')">Shyam</div>
-            </div>
-            <div class="chat-window">
-              <div class="messages" id="messages">
-                <div class="msg received">Hello!</div>
-                <div class="msg sent">Hi, how are you?</div>
-              </div>
-              <div class="chat-input">
-                <input type="text" id="chatInput" placeholder="Type a message...">
-                <button onclick="sendMessage()">Send</button>
-              </div>
-            </div>
-          </div>
-        `;
-      }
-
-      if (section === "notifications") {
-        content.innerHTML = `
-          <h2>Notifications</h2>
-          <div class="card">Your request was accepted by Shyam</div>
-          <div class="card">Reminder: Review your last service</div>
-        `;
-      }
-
-      if (section === "settings") {
-        content.innerHTML = `
-          <h2>Settings</h2>
-          <form onsubmit="event.preventDefault(); alert('Saved!');">
-            <label>Name:</label><br>
-            <input type="text" value="<%= user.name %>"><br><br>
-            <label>Age:</label><br>
-            <input type="number" value="<%= user.age %>"><br><br>
-            <label>Address:</label><br>
-            <input type="text" value="<%= user.address %>"><br><br>
-            <label>Category of Work:</label><br>
-            <input type="text" value="Customer"><br><br>
-            <button type="submit">Save</button>
-          </form>
-        `;
-      }
+      // Show selected section
+      document.getElementById(section + "-section").style.display = "block";
     }
 
     function logout() {

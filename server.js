@@ -1,10 +1,18 @@
 const path=require("path");
 const express = require("express");
 const fs = require("fs");
+const http = require("http");
+const socketio = require("socket.io");
+const bodyParser = require("body-parser");
+
 const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
 const PORT = 3000;
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // JSON bhi handle karega
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "working")));
 
 app.set("view engine", "ejs");
@@ -59,7 +67,16 @@ app.get("/user/:id", (req, res) => {
 
     if (foundUser) {
       console.log("✅ User Found:", foundUser);
-      res.render("user-dashboard", { user: foundUser }); // EJS render karega
+      // Load workers for chat
+      fs.readFile("worker.json", "utf8", (err, workerData) => {
+        let workers = [];
+        if (!err && workerData) {
+          try {
+            workers = JSON.parse(workerData);
+          } catch (e) {}
+        }
+        res.render("user-dashboard", { user: foundUser, workers }); // EJS render karega
+      });
     } else {
       console.log("❌ User not found for ID:", userId);
       res.status(404).send("User not found");
@@ -189,7 +206,17 @@ app.get("/worker/:id", (req, res) => {
     console.log("🔍 Found worker:", foundWorker);
 
     if (foundWorker) {
-      res.render("worker-dashboard", { worker: foundWorker });
+      // Load conversations for this worker
+      fs.readFile("conversations.json", "utf8", (err, convoData) => {
+        let conversations = [];
+        if (!err && convoData) {
+          try {
+            conversations = JSON.parse(convoData);
+          } catch (e) {}
+        }
+        const requests = conversations.filter(c => c.workerId === workerId);
+        res.render("worker-dashboard", { worker: foundWorker, requests });
+      });
     } else {
       res.status(404).send("Worker not found");
     }
@@ -252,6 +279,75 @@ app.post("/user-login", (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});  
+// -------- CHAT FUNCTIONALITY --------
+
+// Send request
+app.post("/sendRequest", (req, res) => {
+  const { userId, workerId } = req.body;
+  const conversations = JSON.parse(fs.readFileSync("conversations.json", "utf-8"));
+
+  // avoid duplicate
+  let existing = conversations.find(c => c.userId == userId && c.workerId == workerId);
+  if (!existing) {
+    conversations.push({
+      userId: parseInt(userId),
+      workerId: parseInt(workerId),
+      messages: []
+    });
+    fs.writeFileSync("conversations.json", JSON.stringify(conversations, null, 2));
+  }
+  res.send("Request Sent Successfully!");
+});
+
+// Open chat
+app.get("/chat/:userId/:workerId/:type", (req, res) => {
+  const { userId, workerId, type } = req.params;  // type = "user" or "worker"
+
+  const conversations = JSON.parse(fs.readFileSync("conversations.json", "utf-8"));
+  let convo = conversations.find(c => c.userId == userId && c.workerId == workerId);
+  if (!convo) return res.send("No conversation found");
+
+  // type decide kare sender
+  let sender = type;  // frontend me use hoga
+  res.render("chat", { convo, sender });
+});
+
+// -------- SOCKET.IO CHAT --------
+io.on("connection", socket => {
+  console.log("✅ New socket connected");
+
+  // Room join
+  socket.on("joinRoom", ({ userId, workerId }) => {
+    const room = `${userId}-${workerId}`;
+    socket.join(room);
+    console.log(`Joined room: ${room}`);
+
+    // Pehle ke messages bhej do
+    const conversations = JSON.parse(fs.readFileSync("conversations.json", "utf-8"));
+    const convo = conversations.find(c => c.userId == userId && c.workerId == workerId);
+    if (convo) {
+      socket.emit("loadMessages", convo.messages);
+    }
+  });
+
+  // Naya message
+  socket.on("chatMessage", ({ userId, workerId, sender, text }) => {
+    const conversations = JSON.parse(fs.readFileSync("conversations.json", "utf-8"));
+    let convo = conversations.find(c => c.userId == userId && c.workerId == workerId);
+
+    if (convo) {
+      const msg = { sender, text, time: new Date().toLocaleTimeString() };
+      convo.messages.push(msg);
+
+      // Save JSON
+      fs.writeFileSync("conversations.json", JSON.stringify(conversations, null, 2));
+
+      const room = `${userId}-${workerId}`;
+      io.to(room).emit("message", msg); // send to chat room
+    }
+  });
+});
+
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running at http://0.0.0.0:${PORT}`);
+});
