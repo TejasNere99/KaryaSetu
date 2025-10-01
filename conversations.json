@@ -1,28 +1,3 @@
 [
-  {
-    "userId": 1,
-    "workerId": 1,
-    "messages": [
-      {
-        "sender": "worker",
-        "text": "hello bhai ",
-        "time": "1:35:05 pm"
-      },
-      {
-        "sender": "user",
-        "text": "Hello  I am sahil",
-        "time": "1:35:23 pm"
-      },
-      {
-        "sender": "worker",
-        "text": "yiikk jhala na whatsapp",
-        "time": "1:35:26 pm"
-      },
-      {
-        "sender": "user",
-        "text": "Hooraeh",
-        "time": "1:35:45 pm"
-      }
-    ]
-  }
+  
 ]
