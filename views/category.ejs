@@ -29,14 +29,61 @@
             <p><strong>Experience:</strong> <%= w.experience %> years</p>
             <p><strong>Address:</strong> <%= w.address %></p>
           </div>
-          <form action="/submit2" method="post">
-            <a href="/category/<%= w.category%>/<%= w.id %>"></a>
-            <input type="hidden" name="workerId" value=" <%= w.id %> ">
-            <button type="submit" class="hire-btn">Hire Me</button>  
-          </form>
+          <div class="action-buttons">
+            <button class="hire-btn send-request-btn" data-worker-id="<%= w.id %>">Send Request</button>
+            <button class="hire-btn message-me-btn" data-worker-id="<%= w.id %>">Message Me</button>
+          </div>
         </div>
       <% }) %>
     <% } %>
   </div>
+
+  <script>
+    let userId = null;
+    try {
+      userId = parseInt(localStorage.getItem('userId'));
+    } catch (e) {}
+
+    document.querySelectorAll('.send-request-btn').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        if (!userId) {
+          alert('Login required to send request');
+          return;
+        }
+        const workerId = parseInt(e.target.dataset.workerId);
+        try {
+          const response = await fetch('/sendRequest', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId, workerId })
+          });
+          const result = await response.text();
+          alert(result);
+        } catch (error) {
+          alert('Error sending request');
+        }
+      });
+    });
+
+    document.querySelectorAll('.message-me-btn').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        if (!userId) {
+          alert('Login required to message');
+          return;
+        }
+        const workerId = parseInt(e.target.dataset.workerId);
+        // First send request if not already
+        try {
+          await fetch('/sendRequest', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId, workerId })
+          });
+        } catch (e) {}
+        // Then open chat
+        window.open(`/chat/${userId}/${workerId}/user`, '_blank');
+      });
+    });
+  </script>
 </body>
 </html>

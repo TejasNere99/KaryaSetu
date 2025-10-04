@@ -98,18 +98,61 @@ h1 {
   color: #333;
 }
 .hire-btn{
-      /* width: 100%; */
-      width: 50%;
+      width: 45%;
       padding: 10px;
       background: linear-gradient(135deg, #2575fc, #6a11cb);
       border: none;
       border-radius: 6px;
       color: white;
-      font-size: 16px;
+      font-size: 14px;
       cursor: pointer;
-      margin: 0.3rem 0rem 1rem 6rem;
-  /* margin: 0rem 0rem 1rem 9rem;
-  padding: 0.5rem 1rem;
-  font-weight: 600;
-  background-color: ; */
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hire-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.hire-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+}
+
+/* Worker Details Page */
+.worker-detail-card {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  max-width: 600px;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.worker-detail-card .card-image {
+  width: 150px;
+  height: 150px;
+  margin: 20px;
+}
+
+.worker-detail-card .card-content {
+  padding: 20px;
+  text-align: center;
+}
+
+.worker-detail-card .card-content h2 {
+  margin: 0 0 10px;
+  font-size: 2rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: 20px 0;
 }

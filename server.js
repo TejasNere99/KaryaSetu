@@ -175,13 +175,14 @@ app.get("/category/:name", (req, res) => {
     }
 
     // Filter workers by category
-    let filtered = workers.filter(w => 
+    let filtered = workers.filter(w =>
       w.category && w.category.toLowerCase() === category.toLowerCase()
     );
 
     res.render("category", { category, workers: filtered });
   });
 });
+
 
 // 📌 Worker Dashboard Route
 app.get("/worker/:id", (req, res) => {

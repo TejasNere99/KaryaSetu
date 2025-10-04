@@ -1,3 +1,7 @@
 [
-  
+  {
+    "userId": 1,
+    "workerId": 1,
+    "messages": []
+  }
 ]
