@@ -1,133 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title><%= worker.name %> - Worker Dashboard</title>
-  <link rel="stylesheet" href="/Profile/user profile/style.css">
+  <title>
+    <%= worker.name %> - Worker Dashboard
+  </title>
+  <link rel="stylesheet" href="/user-dashboard.css">
+  <link rel="stylesheet" href="/worker-dashboard.css">
 </head>
-<body>
 
+<body>
+  <!-- Navbar -->
   <div class="navbar">
     <h1>KaryaSetu</h1>
-    <div class="profile-icon" title="<%= worker.name %>"><%= (worker.name || 'W').trim().charAt(0).toUpperCase() %></div>
+    <div class="profile-icon" title="<%= worker.name %>">
+      <%= (worker.name || 'W' ).trim().charAt(0).toUpperCase() %>
+    </div>
   </div>
 
+  <!-- Dashboard -->
   <div class="dashboard" id="dashboard" style="display:flex;">
+    <!-- Sidebar -->
     <div class="sidebar">
       <ul>
-        <li class="active" onclick="showSection('jobs', event)">My Jobs</li>
+        <li class="active" onclick="showSection('my-jobs', event)">My Jobs</li>
         <li onclick="showSection('chats', event)">Chats</li>
-        <li onclick="showSection('notifications', event)">Notifications</li>
         <li onclick="showSection('profile', event)">Profile</li>
         <li onclick="logout()">Logout</li>
+        <li><a href="http://localhost:3000/"
+          class="btn-back">
+          ← Back
+        </a></li>
       </ul>
     </div>
 
+    <!-- Content -->
     <div class="content" id="content">
-      <!-- Jobs section -->
-      <div id="jobs-section" style="display:block;">
+      <!-- My Jobs Section -->
+      <div id="my-jobs-section" style="display:block;"> <!-- ✅ Default Visible -->
         <h2>My Jobs</h2>
-        <div class="card">Welcome <%= worker.name %>! No active jobs yet.</div>
-        <div class="card">Tip: Keep your profile updated to get more requests.</div>
+
+        <% if (requests.length===0) { %>
+          <div class="card">No active jobs yet.</div>
+          <% } else { %>
+            <% requests.forEach(r=> { %>
+              <div class="card">
+                <p><b>Customer:</b>
+                  <% let u=users.find(uk=> uk.id == r.userId); %>
+                    <%= u ? u.name : 'N/A' %>
+                </p>
+                <p><b>Description:</b>
+                  <%= r.description %>
+                </p>
+                <p><b>Location:</b>
+                  <%= r.location %>
+                </p>
+                <p><b>Status:</b>
+                  <%= r.status %>
+                </p>
+
+                <!-- 🔘 Action Buttons -->
+                <div class="job-actions">
+                  <form action="/request/accept/<%= r.id %>?_method=PATCH" method="post">
+                    <button type="submit" class="btn accept">Accept</button>
+                  </form>
+
+                  <form action="/request/reject/<%= r.id %>?_method=PATCH" method="post">
+                    <button type="submit" class="btn reject">Reject</button>
+                  </form>
+
+                  <form action="/requestDetails/worker/<%= r.id %>" method="get">
+                    <button type="submit" class="btn view">View Details</button>
+                  </form>
+
+                  <form action="/chat/<%= r.userId %>/<%= worker.id %>/worker" method="get">
+                    <button type="submit" class="btn message">Message</button>
+                  </form>
+                </div>
+              </div>
+              <% }) %>
+                <% } %>
       </div>
 
-      <!-- Chats section -->
+      <!-- Chats Section -->
       <div id="chats-section" style="display:none;">
         <h2>Chats</h2>
-        <h3>Your Requests</h3>
-        <ul>
-          <% requests.forEach(req => { %>
-            <li>
-              Request from User <%= req.userId %>
-              <a href="/chat/<%= req.userId %>/<%= worker.id %>/worker" target="_blank">Open Chat</a>
-            </li>
-          <% }) %>
-        </ul>
+
+        <% if (conversations.length===0) { %>
+          <div class="card">You haven't chatted with any customers yet.</div>
+          <% } else { %>
+            <ul class="chat-list">
+              <% conversations.forEach(conv=> {
+                let customer = users.find(u => u.id == conv.userId);
+                if (customer) { %>
+                <li class="chat-item">
+                  <div class="chat-info">
+                    <p><b>
+                        <%= customer.name %>
+                      </b></p>
+                    <p class="chat-desc">Customer</p>
+                  </div>
+                  <a href="/chat/<%= customer.id %>/<%= worker.id %>/worker" target="_blank" class="chat-btn">
+                    Open Chat
+                  </a>
+                </li>
+                <% } }) %>
+            </ul>
+            <% } %>
       </div>
 
-      <!-- Notifications section -->
-      <div id="notifications-section" style="display:none;">
-        <h2>Notifications</h2>
-        <div class="card">You received a new booking request.</div>
-        <div class="card">Reminder: Verify your phone number.</div>
-      </div>
-
-      <!-- Profile section -->
+      <!-- Profile Section -->
       <div id="profile-section" style="display:none;">
-        <h2>Profile</h2>
-        <div class="card">
-          <b>Name:</b> <%= worker.name %><br>
-          <b>Mobile:</b> <%= worker.mobile %><br>
-          <b>Category:</b> <%= worker.category %><br>
-          <b>Subcategory:</b> <%= worker.subcategory %><br>
-          <b>Experience (years):</b> <%= worker.experience %><br>
-          <b>Address:</b> <%= worker.address %><br>
+        <h2>Worker Profile</h2>
+
+        <div class="profile-card">
+          <form method="post" class="profile-form" action="/profileUpdate/worker/<%= worker.id %>?_method=PATCH">
+
+            <!-- Worker Image -->
+            <div class="profile-photo">
+              <% if (worker.img && worker.img !=="" ) { %>
+                <img src="<%= worker.img %>" alt="<%= worker.name %>">
+                <% } else { %>
+                  <div class="default-avatar">👷</div>
+                  <% } %>
+            </div>
+
+            <!-- Name -->
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" value="<%= worker.name %>" required>
+            </div>
+
+            <!-- Mobile -->
+            <div class="form-group">
+              <label for="mobile">Mobile Number</label>
+              <input type="tel" id="mobile" name="mobile" value="<%= worker.mobile %>" required>
+            </div>
+
+            <!-- Category & Subcategory -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="category">Category</label>
+                <input type="text" id="category" name="category" value="<%= worker.category %>" required>
+              </div>
+
+              <div class="form-group">
+                <label for="subcategory">Subcategory</label>
+                <input type="text" id="subcategory" name="subcategory" value="<%= worker.subcategory %>" required>
+              </div>
+            </div>
+
+            <!-- Age & Experience -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" value="<%= worker.age %>" required>
+              </div>
+
+              <div class="form-group">
+                <label for="experience">Experience (Years)</label>
+                <input type="number" step="0.5" id="experience" name="experience" value="<%= worker.experience %>"
+                  required>
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div class="form-group">
+              <label for="address">Address</label>
+              <textarea id="address" name="address" rows="3" required><%= worker.address %></textarea>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" value="<%= worker.password %>" required>
+            </div>
+
+            <!-- Save Button -->
+            <div class="form-actions">
+              <button type="submit" class="save-btn">Save Changes</button>
+            </div>
+          </form>
         </div>
-        <h3>Edit Profile</h3>
-        <form onsubmit="event.preventDefault(); alert('Saved!');">
-          <label>Name:</label><br>
-          <input type="text" value="<%= worker.name %>"><br><br>
-          <label>Category:</label><br>
-          <input type="text" value="<%= worker.category %>"><br><br>
-          <label>Subcategory:</label><br>
-          <input type="text" value="<%= worker.subcategory %>"><br><br>
-          <label>Experience (years):</label><br>
-          <input type="number" step="0.5" value="<%= worker.experience %>"><br><br>
-          <label>Address:</label><br>
-          <input type="text" value="<%= worker.address %>"><br><br>
-          <button type="submit">Save</button>
-        </form>
       </div>
     </div>
   </div>
 
+  <!-- ✅ FIXED SCRIPT -->
   <script>
-    const content = document.getElementById("content");
     const sidebarItems = document.querySelectorAll(".sidebar ul li");
 
     function showSection(section, event) {
+      // remove active class from all
       sidebarItems.forEach(item => item.classList.remove("active"));
       event.target.classList.add("active");
 
-      // Hide all sections
-      document.getElementById("jobs-section").style.display = "none";
+      // hide all sections
+      document.getElementById("my-jobs-section").style.display = "none";
       document.getElementById("chats-section").style.display = "none";
-      document.getElementById("notifications-section").style.display = "none";
       document.getElementById("profile-section").style.display = "none";
 
-      // Show selected section
+      // show the one user clicked
       document.getElementById(section + "-section").style.display = "block";
+
+      // save last open section in localStorage
+      localStorage.setItem("workerLastSection", section);
     }
 
+    // ✅ Auto-show last opened section (or default)
+    window.addEventListener("DOMContentLoaded", () => {
+      const last = localStorage.getItem("workerLastSection") || "my-jobs";
+      document.getElementById(last + "-section").style.display = "block";
+      sidebarItems.forEach(li => {
+        if (li.textContent.toLowerCase().includes(last.replace("-", " "))) {
+          li.classList.add("active");
+        }
+      });
+    });
+
+    // ✅ Logout logic
     function logout() {
       try {
-        localStorage.setItem("isUserLoggedIn", "false");
-        localStorage.removeItem("userName");
+        localStorage.removeItem("isUserLoggedIn");
         localStorage.removeItem("userId");
-        localStorage.removeItem("isWorkerLoggedIn");
-        localStorage.removeItem("workerName");
         localStorage.removeItem("workerId");
-      } catch (e) {}
+        localStorage.removeItem("workerLastSection");
+      } catch (e) { }
       window.location.href = "/";
     }
-
-    function sendMessage() {
-      const input = document.getElementById("chatInput");
-      const msgBox = document.getElementById("messages");
-      if (input && msgBox && input.value.trim() !== "") {
-        const msg = document.createElement("div");
-        msg.classList.add("msg", "sent");
-        msg.innerText = input.value;
-        msgBox.appendChild(msg);
-        input.value = "";
-        msgBox.scrollTop = msgBox.scrollHeight;
-      }
-    }
-
-    function openChat(withWhom) {
-      alert("Opening chat with " + withWhom);
-    }
   </script>
-</body>
-</html>
 
+</body>
+
+</html>

@@ -1,0 +1,489 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f4f6f9;
+  min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+  background: linear-gradient(90deg, #3b82f6, #9333ea);
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar h1 {
+  font-size: 20px;
+}
+
+.profile-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: white;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Dashboard Layout */
+.dashboard {
+  display: none;
+  height: calc(100vh - 60px);
+  display: flex;
+}
+
+.sidebar {
+  width: 220px;
+  background: linear-gradient(180deg, #3b82f6, #9333ea);
+  color: white;
+  padding: 20px 0;
+  flex-shrink: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li {
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-back{
+  text-decoration: none;
+  color: white;
+}
+
+.sidebar ul li:hover,
+.sidebar ul li.active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.chat-container {
+  display: flex;
+  gap: 20px;
+}
+
+.chat-list {
+  width: 200px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  height: 400px;
+  overflow-y: auto;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.chat-list div {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.chat-window {
+  flex: 1;
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.msg {
+  margin: 5px 0;
+  padding: 8px;
+  border-radius: 5px;
+  max-width: 70%;
+}
+
+.msg.sent {
+  background: #3b82f6;
+  color: white;
+  align-self: flex-end;
+}
+
+.msg.received {
+  background: #eee;
+  align-self: flex-start;
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.chat-input button {
+  padding: 8px 15px;
+  background: #3b82f6;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+/* -------- Requests Section -------- */
+#requests-section {
+  background: #f7f9fc;
+  padding: 25px 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+#requests-section h2 {
+  text-align: center;
+  color: #2d2d2d;
+  font-size: 26px;
+  margin-bottom: 25px;
+  letter-spacing: 0.5px;
+}
+
+/* -------- Card Styles -------- */
+#requests-section .card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 20px 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#requests-section .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+/* -------- Text Inside Cards -------- */
+#requests-section .card p {
+  margin: 6px 0;
+  color: #444;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* -------- Button Container -------- */
+#requests-section .request-actions {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* -------- Buttons -------- */
+#requests-section .btn {
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  color: white;
+}
+
+/* View Details Button */
+#requests-section .btn.view {
+  background-color: #007bff;
+}
+#requests-section .btn.view:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+/* Message Button */
+#requests-section .btn.message {
+  background-color: #ffc107;
+  color: #222;
+}
+#requests-section .btn.message:hover {
+  background-color: #e0a800;
+  transform: translateY(-1px);
+}
+
+/* -------- Empty State Card -------- */
+#requests-section .card:only-child {
+  text-align: center;
+  background: #fefefe;
+  color: #666;
+  box-shadow: none;
+  border: 1px dashed #ccc;
+}
+
+
+/* ===============================
+   💬 CHAT SECTION — FULL WIDTH UI
+   =============================== */
+
+#chats-section {
+  background: #f7f9fc;
+  padding: 30px 50px;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  margin: 0;
+}
+
+/* Title */
+#chats-section h2 {
+  color: #2d2d2d;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  text-align: left;
+  position: relative;
+}
+
+#chats-section h2::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #9333ea);
+  border-radius: 3px;
+}
+
+/* Chat List Layout (Full width grid) */
+.chat-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 22px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+/* Chat Item Card */
+.chat-item {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #e1e1e1;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+  width: 100%;
+  min-height: 80px;
+}
+
+.chat-item:hover {
+  transform: translateY(-3px);
+  border-color: #3b82f6;
+  box-shadow: 0 6px 14px rgba(59, 130, 246, 0.15);
+  background: #fdfdfd;
+}
+
+/* Chat Info */
+.chat-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-info p {
+  margin: 2px 0;
+  color: #333;
+}
+
+.chat-info p:first-child {
+  font-weight: 600;
+  font-size: 17px;
+  color: #1a1a1a;
+}
+
+.chat-desc {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+/* Open Chat Button */
+.chat-btn {
+  background: linear-gradient(90deg, #3b82f6, #6366f1);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
+}
+
+.chat-btn:hover {
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
+}
+
+/* Empty State */
+#chats-section .card {
+  background: #ffffff;
+  border-radius: 10px;
+  text-align: center;
+  color: #666;
+  padding: 25px;
+  border: 1px dashed #ccc;
+  margin: 40px auto;
+  max-width: 600px;
+}
+
+/* Responsive View */
+@media (max-width: 1000px) {
+  #chats-section {
+    padding: 20px;
+  }
+
+  .chat-list {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .chat-btn {
+    align-self: flex-end;
+  }
+}
+
+
+/* ---------- Profile Section ---------- */
+#settings-section {
+  background: #f7f9fc;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+#settings-section h2 {
+  text-align: center;
+  color: #2d2d2d;
+  font-size: 26px;
+  margin-bottom: 25px;
+}
+
+/* ---------- Profile Card ---------- */
+.profile-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 25px 30px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Form Layout ---------- */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+}
+
+/* ---------- Row Layout for Two Inputs ---------- */
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+/* ---------- Save Button ---------- */
+.form-actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.save-btn {
+  background: linear-gradient(90deg, #3b82f6, #9333ea);
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.save-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+}
+

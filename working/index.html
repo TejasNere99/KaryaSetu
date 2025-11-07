@@ -1,56 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
     <div class="main">
         <div class="navbar" id="navbar" style="position: sticky;">
-            <div class="logo navbar-opt" style="margin-bottom: 1rem; margin-left: 6rem;" >
-                <img src="./assets/logo1.PNG">    
+            <div class="logo navbar-opt" style="margin-bottom: 1rem; margin-left: 6rem;">
+                <img src="./assets/logo1.PNG">
                 <h2 data-i18n style="color: #0333addb; font-weight: 700;">KaryaSetu</h2>
             </div>
-            <div class="options" id="navbar-options" >
-                    <a data-i18n href="index.html">Home</a>
-                    <a data-i18n href="howItWorks.html">How it works</a>
-                    <a data-i18n href="contactUs.html">Contact us</a>
-                    <a data-i18n href="aboutus.html">About us</a>
-                    <!-- 🌐 Language Switcher -->
-                    <select id="langSwitcher" style="margin-left: 1rem; padding: 4px; border-radius: 6px;">
-                        <option value="en">English</option>
-                        <option value="hi">हिंदी</option>
-                        <option value="mr">मराठी</option>
-                    </select>
+            <div class="options" id="navbar-options">
+                <a data-i18n href="index.html">Home</a>
+                <a data-i18n href="howItWorks.html">How it works</a>
+                <a data-i18n href="contactUs.html">Contact us</a>
+                <a data-i18n href="aboutus.html">About us</a>
+                <!-- 🌐 Language Switcher -->
+                <select id="langSwitcher" style="margin-left: 1rem; padding: 4px; border-radius: 6px;">
+                    <option value="en">English</option>
+                    <option value="hi">हिंदी</option>
+                    <option value="mr">मराठी</option>
+                </select>
             </div>
             <div class="login-opt navbar-opt" id="login-opt" style="margin-bottom: 1rem; margin-right: 5rem;">
-                <button data-i18n id="login-btn" type="button" class="btn btn-primary btn-lg" >Login</button>
+                <button data-i18n id="login-btn" type="button" class="btn btn-primary btn-lg">Login</button>
             </div>
             <div class="profile-opt navbar-opt" id="profile-section" style="display:none;">
-              <a href="#" class="profile-link" id="profile-link" style="margin-right: 2rem;">
-                <div class="profile-icon">
-                    <i class="fas fa-user"></i>
-                </div>
-                <span id="profile-name"></span>
-              </a>
-              <button data-i18n id="logout-btn" type="button" class="btn btn-primary btn-lg" >Logout</button>
+                <a href="#" class="profile-link" id="profile-link" style="margin-right: 2rem;">
+                    <div class="profile-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <span id="profile-name"></span>
+                </a>
+                <button data-i18n id="logout-btn" type="button" class="btn btn-primary btn-lg">Logout</button>
             </div>
             <!-- <button id="logout-btn" type="button" class="btn btn-primary btn-lg" style="display: none;">Logout</button> -->
         </div>
         <div class="main-content">
-            <div class="box-1 box" >
-                <img src="./assets/logo1.PNG"> 
+            <div class="box-1 box">
+                <img src="./assets/logo1.PNG">
                 <h1 style="font-size: 3rem; color: rgb(255, 136, 0); font-weight: 900;">आत्मनिर्भर भारत का सेतु </h1>
                 <h1 style="font-size: 3rem; color: rgb(0, 170, 147); font-weight: 900;">कार्य सेतु</h1>
                 <div id="para" style="margin-top: 2rem; max-width: 550px; margin-left: 70px;">
-                    <p data-i18n style="font-size: 1.4rem;">KaryaSetu connects skilled laborers with the people who need them simply, directly, and with trust.</p>
+                    <p data-i18n style="font-size: 1.4rem;">KaryaSetu connects skilled laborers with the people who need
+                        them simply, directly, and with trust.</p>
                 </div>
-                  
+
             </div>
             <div class="box-2 box">
                 <img src="./assets/first_img.JPG">
@@ -111,11 +117,12 @@
     <div class="footer">
         <div class="footer-content">
             <div class="box1">
-                <div class="logo navbar-opt" id="footer-logo" style=" margin-left: 0rem;" >
-                <img src="./assets/logo1.PNG">    
-                <h4 data-i18n style="color: white; font-weight: 700;">KaryaSetu</h4>
+                <div class="logo navbar-opt" id="footer-logo" style=" margin-left: 0rem;">
+                    <img src="./assets/logo1.PNG">
+                    <h4 data-i18n style="color: white; font-weight: 700;">KaryaSetu</h4>
                 </div>
-                <p data-i18n style="color: rgba(255, 255, 255, 0.619);">India’s trusted platform connecting people with skilled laborers and ensuring quick, reliable services for every need</p>
+                <p data-i18n style="color: rgba(255, 255, 255, 0.619);">India’s trusted platform connecting people with
+                    skilled laborers and ensuring quick, reliable services for every need</p>
                 <div class="icons">
                     <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -126,7 +133,7 @@
             <div class="box2 footer-box">
                 <h5 data-i18n style="color: white;">For Users</h5>
                 <a data-i18n href="userReg.html" id="footer-register">Register</a>
-                <a data-i18n href="#" id="footer-categories">Explore categories</a>   
+                <a data-i18n href="#" id="footer-categories">Explore categories</a>
             </div>
             <div class="box3 footer-box">
                 <h5 data-i18n style="color: white;">For Workers</h5>
@@ -138,7 +145,7 @@
                 <a data-i18n href="contactUs.html" id="footer-contact">Contact Us</a>
             </div>
         </div>
-    </div>    
+    </div>
     <script src="app.js"></script>
     <script>
         window.onload = () => {
@@ -160,15 +167,15 @@
                 const profileLink = `/user/${userId}`;
                 console.log("🔗 Profile Link:", profileLink);
                 document.getElementById("profile-link").href = profileLink;
-                
+
                 // Add click event listener for debugging
-                document.getElementById("profile-link").addEventListener("click", function(e) {
+                document.getElementById("profile-link").addEventListener("click", function (e) {
                     console.log("🖱️ Profile clicked!");
                     console.log("🔗 Current href:", this.href);
                     console.log("🔍 User ID from localStorage:", localStorage.getItem("userId"));
                     console.log("🔍 Is logged in:", localStorage.getItem("isUserLoggedIn"));
                 });
-             } else if (localStorage.getItem("isWorkerLoggedIn") === "true") {
+            } else if (localStorage.getItem("isWorkerLoggedIn") === "true") {
                 // If worker logged in, show name and link to worker dashboard
                 const workerName = localStorage.getItem("workerName");
                 const workerId = localStorage.getItem("workerId");
@@ -179,14 +186,15 @@
                 document.getElementById("profile-name").innerText = workerName;
                 const workerProfileLink = `/worker/${workerId}`;
                 document.getElementById("profile-link").href = workerProfileLink;
-             } else if(isLoggedIn === "false" || isLoggedIn === null){
+            } else if (isLoggedIn === "false" || isLoggedIn === null) {
                 document.getElementById("login-opt").style.display = "block";
                 document.getElementById("navbar-options").style.marginRight = "5rem";
                 document.getElementById("login-btn").style.display = "block";
                 document.getElementById("profile-section").style.display = "none";
-             }
+            }
         };
     </script>
 
 </body>
+
 </html>

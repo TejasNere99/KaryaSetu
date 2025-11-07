@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title><%= user.name %> - Dashboard</title>
-  <link rel="stylesheet" href="/Profile/user profile/style.css">
+  <title>
+    <%= user.name %> - Dashboard
+  </title>
+  <link rel="stylesheet" href="/user-dashboard.css">
 </head>
+
 <body>
 
   <!-- Navbar -->
   <div class="navbar">
     <h1>KaryaSetu</h1>
-    <div class="profile-icon" title="<%= user.name %>"><%= (user.name || 'U').trim().charAt(0).toUpperCase() %></div>
+    <div class="profile-icon" title="<%= user.name %>">
+      <%= (user.name || 'U' ).trim().charAt(0).toUpperCase() %>
+    </div>
   </div>
 
   <!-- Dashboard -->
@@ -20,62 +26,135 @@
       <ul>
         <li class="active" onclick="showSection('requests', event)">Requests Sent</li>
         <li onclick="showSection('chats', event)">Chats</li>
-        <li onclick="showSection('notifications', event)">Notifications</li>
-        <li onclick="showSection('settings', event)">Settings</li>
+        <li onclick="showSection('settings', event)">Profile</li>
         <li onclick="logout()">Logout</li>
+        <li><a href="http://localhost:3000/"
+          class="btn-back">
+          ← Back
+        </a></li>
       </ul>
     </div>
+
 
     <!-- Content -->
     <div class="content" id="content">
       <!-- Requests section -->
       <div id="requests-section" style="display:block;">
         <h2>Requests Sent</h2>
-        <div class="card">Hello <%= user.name %>! Your recent request for a Mason is Pending.</div>
-        <div class="card">Example: Carpenter request Status is Accepted.</div>
-        <div class="card">Example: Painter request Status is Rejected.</div>
+
+        <% if(myRequests.length===0) { %>
+          <div class="card">You haven't sent any requests yet.</div>
+          <% } else { %>
+            <% myRequests.forEach(req=> { %>
+              <div class="card">
+                <p><b>Work:</b>
+                  <%= req.description %>
+                </p>
+                <p><b>Status:</b>
+                  <%= req.status %>
+                </p>
+                <p><b>Worker:</b>
+                  <% let w=workers.find(wk=> wk.id == req.workerId); %>
+                    <%= w ? w.name : 'N/A' %>
+                </p>
+
+                <div class="request-actions">
+                  <form action="/requestDetails/<%= req.id %>" method="get">
+                    <button type="submit" class="btn view">View Details</button>
+                  </form>
+
+                  <% if (w) { %>
+                    <form action="/chat/<%= user.id %>/<%= req.workerId %>/user" method="get">
+                      <button type="submit" class="btn message">Message</button>
+                    </form>
+                    <% } %>
+                </div>
+              </div>
+              <% }) %>
+                <% } %>
       </div>
 
-      <!-- Chats section -->
+
+      <!-- Chats Section -->
       <div id="chats-section" style="display:none;">
         <h2>Chats</h2>
-        <h3>Available Workers</h3>
-        <ul>
-          <% workers.forEach(worker => { %>
-            <li>
-              <img src="<%= worker.img %>" width="50" alt="<%= worker.name %>">
-              <b><%= worker.name %></b> - <%= worker.category %>
-              <form action="/sendRequest" method="POST" style="display:inline;">
-                <input type="hidden" name="userId" value="<%= user.id %>">
-                <input type="hidden" name="workerId" value="<%= worker.id %>">
-                <button type="submit">Send Request</button>
-              </form>
-              <a href="/chat/<%= user.id %>/<%= worker.id %>/user" target="_blank">Open Chat</a>
-            </li>
-          <% }) %>
-        </ul>
+
+        <% if (conversations.length===0) { %>
+          <div class="card">You haven't started any conversations yet.</div>
+          <% } else { %>
+            <ul class="chat-list">
+              <% conversations.forEach(conv=> {
+                // Find worker details from worker list
+                let worker = workers.find(wk => wk.id == conv.workerId);
+                if (worker) { %>
+                <li class="chat-item">
+                  <div class="chat-info">
+                    <p><b>
+                        <%= worker.name %>
+                      </b></p>
+                    <p class="chat-desc">
+                      <%= worker.category || 'Service Provider' %>
+                    </p>
+                  </div>
+                  <a href="/chat/<%= user.id %>/<%= worker.id %>/user" target="_blank" class="chat-btn">
+                    Open Chat
+                  </a>
+                </li>
+                <% } }) %>
+            </ul>
+            <% } %>
       </div>
 
-      <!-- Notifications section -->
-      <div id="notifications-section" style="display:none;">
-        <h2>Notifications</h2>
-        <div class="card">Your request was accepted by Shyam</div>
-        <div class="card">Reminder: Review your last service</div>
-      </div>
 
-      <!-- Settings section -->
+      <!-- Profile Section -->
       <div id="settings-section" style="display:none;">
-        <h2>Settings</h2>
-        <form onsubmit="event.preventDefault(); alert('Saved!');">
-          <label>Name:</label><br>
-          <input type="text" value="<%= user.name %>"><br><br>
-          <label>Age:</label><br>
-          <input type="number" value="<%= user.age %>"><br><br>
-          <label>Address:</label><br>
-          <input type="text" value="<%= user.address %>"><br><br>
-          <label>Category of Work:</label><br>
-          <input type="text" value="Customer"><br><br>
-          <button type="submit">Save</button>
+        <h2>Profile Settings</h2>
+        <form action="/profileUpdate/user/<%= user.id %>?_method=PATCH" method="post">
+
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" value="<%= user.name %>" required>
+          </div>
+
+          <div class="form-group">
+            <label for="mobile">Mobile Number</label>
+            <input type="tel" id="mobile" name="mobile" value="<%= user.mobile %>" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="age">Age</label>
+              <input type="number" id="age" name="age" value="<%= user.age %>" required>
+            </div>
+
+            <div class="form-group">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender">
+                <option value="Male" <%=user.gender==='Male' ? 'selected' : '' %>>Male</option>
+                <option value="Female" <%=user.gender==='Female' ? 'selected' : '' %>>Female</option>
+                <option value="Other" <%=user.gender==='Other' ? 'selected' : '' %>>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="occupation">Occupation</label>
+            <input type="text" id="occupation" name="occupation" value="<%= user.occupation %>" required>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" rows="3"><%= user.address %></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" value="<%= user.password %>" required>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="save-btn">Save Changes</button>
+          </div>
         </form>
       </div>
     </div>
@@ -89,22 +168,26 @@
       sidebarItems.forEach(item => item.classList.remove("active"));
       event.target.classList.add("active");
 
-      // Hide all sections
-      document.getElementById("requests-section").style.display = "none";
-      document.getElementById("chats-section").style.display = "none";
-      document.getElementById("notifications-section").style.display = "none";
-      document.getElementById("settings-section").style.display = "none";
+      const sections = ["requests", "chats", "notifications", "settings"];
 
-      // Show selected section
-      document.getElementById(section + "-section").style.display = "block";
+      // hide all
+      sections.forEach(id => {
+        const el = document.getElementById(id + "-section");
+        if (el) el.style.display = "none";
+      });
+
+      // show selected
+      const target = document.getElementById(section + "-section");
+      if (target) target.style.display = "block";
     }
+
 
     function logout() {
       try {
         localStorage.setItem("isUserLoggedIn", "false");
         localStorage.removeItem("userName");
         localStorage.removeItem("userId");
-      } catch (e) {}
+      } catch (e) { }
       window.location.href = "/";
     }
 
@@ -126,4 +209,5 @@
     }
   </script>
 </body>
+
 </html>

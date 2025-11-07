@@ -3,8 +3,11 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "body-parser": "^2.2.0",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "method-override": "^3.0.0",
     "socket.io": "^4.8.1",
-    "body-parser": "^2.2.0"
+    "twilio": "^5.10.4"
   }
 }

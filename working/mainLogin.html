@@ -97,25 +97,25 @@
     }
 
     button {
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            color: aliceblue;
-            width: 155px;
-            height: 37px;
-            border-color: aliceblue;
-            margin-top: 60px;
-            margin-bottom: 10px;
-            border-style: solid;
-             box-shadow: 0 4px 6px rgba(248, 4, 4, 0.1);
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      color: aliceblue;
+      width: 155px;
+      height: 37px;
+      border-color: aliceblue;
+      margin-top: 60px;
+      margin-bottom: 10px;
+      border-style: solid;
+      box-shadow: 0 4px 6px rgba(248, 4, 4, 0.1);
       transition: all 0.3s ease;
-       font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        }
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
 
-        button:hover {
-            transform: scale(1.1);
-        }
+    button:hover {
+      transform: scale(1.1);
+    }
 
     footer {
       text-align: center;
@@ -123,15 +123,53 @@
       font-size: 0.85rem;
       color: #777;
     }
+
+    .btn-back {
+      position: fixed;
+      /* Har page pe same jagah rahe */
+      top: 20px;
+      /* Thoda top se gap */
+      left: 20px;
+      /* Left corner */
+      background-color: #007bff;
+      /* Button color (blue) */
+      color: white;
+      /* Text color */
+      padding: 10px 18px;
+      /* Button spacing */
+      border-radius: 8px;
+      /* Rounded corners */
+      text-decoration: none;
+      /* No underline */
+      font-weight: 500;
+      /* Thoda bold text */
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      /* Soft shadow */
+      transition: all 0.2s ease;
+      /* Smooth hover effect */
+      z-index: 1000;
+      /* Upar rahe sab elements ke */
+    }
+
+    .btn-back:hover {
+      background-color: #0056b3;
+      /* Darker blue on hover */
+      transform: scale(1.05);
+      /* Slight zoom effect */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
   </style>
 </head>
 
 <body class="bg-gradient-to-r from-rose-50 via-orange-50 to-emerald-50 min-h-screen flex flex-col">
-
+  <a href="http://localhost:3000/" class="btn-back">
+    ← Back
+  </a>
   <header>
     <h1>KaryaSetu</h1>
     <p style="font-size: 1.5rem;">Your one-stop platform for trusted labor services and emergency help.</p>
-    <p style="font-size: small; margin-top: 1rem;">Connect laborers, households, and services in a seamless support ecosystem.</p>
+    <p style="font-size: small; margin-top: 1rem;">Connect laborers, households, and services in a seamless support
+      ecosystem.</p>
   </header>
 
   <div class="container">
@@ -147,7 +185,7 @@
       <h3>Worker Login</h3>
       <p>Access your worker dashboard and service details.</p>
       <button id="worker" style="background-color: orangered;color: white;">
-                Access portal ></Access></button>
+        Access portal ></Access></button>
     </div>
   </div>
   <script src="mainLogin.js"></script>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +20,7 @@
       background: #fff;
       padding: 20px 30px;
       border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
       width: 350px;
       text-align: center;
     }
@@ -57,9 +58,49 @@
     p {
       font-size: 12px;
     }
+
+    .btn-back {
+      position: fixed;
+      /* Har page pe same jagah rahe */
+      top: 20px;
+      /* Thoda top se gap */
+      left: 20px;
+      /* Left corner */
+      background-color: #007bff;
+      /* Button color (blue) */
+      color: white;
+      /* Text color */
+      padding: 10px 18px;
+      /* Button spacing */
+      border-radius: 8px;
+      /* Rounded corners */
+      text-decoration: none;
+      /* No underline */
+      font-weight: 500;
+      /* Thoda bold text */
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      /* Soft shadow */
+      transition: all 0.2s ease;
+      /* Smooth hover effect */
+      z-index: 1000;
+      /* Upar rahe sab elements ke */
+    }
+
+    .btn-back:hover {
+      background-color: #0056b3;
+      /* Darker blue on hover */
+      transform: scale(1.05);
+      /* Slight zoom effect */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    
   </style>
 </head>
+
 <body>
+  <a href="http://localhost:3000/" class="btn-back">
+    ← Back
+  </a>
   <div class="container">
     <h2>Laborer Login</h2>
     <input type="text" id="loginMobile" placeholder="Phone Number" />
@@ -69,31 +110,32 @@
   </div>
 
   <script>
-async function login() {
-  const mobile = document.getElementById("loginMobile").value;
-  const password = document.getElementById("loginPassword").value;
+    async function login() {
+      const mobile = document.getElementById("loginMobile").value;
+      const password = document.getElementById("loginPassword").value;
 
-  const res = await fetch("/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ mobile, password })
-  });
+      const res = await fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mobile, password })
+      });
 
-  const data = await res.json();
+      const data = await res.json();
 
-  if (data.success) {
-    alert("✅ Login Successful");
-    console.log("Logged in:", data.user);
-    // Mark worker login separately
-    localStorage.setItem("isWorkerLoggedIn", "true");
-    localStorage.setItem("workerName", data.user.name || data.user.mobile);
-    localStorage.setItem("workerId", data.user.id);
-    // Redirect to worker dashboard
-    window.location.href = "index.html";
-  } else {
-    alert("❌ Invalid Mobile or Password");
-  }
-}
-</script>
+      if (data.success) {
+        alert("✅ Login Successful");
+        console.log("Logged in:", data.user);
+        // Mark worker login separately
+        localStorage.setItem("isWorkerLoggedIn", "true");
+        localStorage.setItem("workerName", data.user.name || data.user.mobile);
+        localStorage.setItem("workerId", data.user.id);
+        // Redirect to worker dashboard
+        window.location.href = "index.html";
+      } else {
+        alert("❌ Invalid Mobile or Password");
+      }
+    }
+  </script>
 </body>
+
 </html>

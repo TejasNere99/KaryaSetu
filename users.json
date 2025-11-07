@@ -1,22 +1,12 @@
 [
   {
-    "name": "Tejas Vikas Nere",
-    "mobile": "9272556195",
-    "age": "25",
+    "name": "Tejas Nere",
+    "mobile": "+919272556195",
+    "age": "19",
     "gender": "Male",
     "occupation": "student",
     "address": "Jijamata Udyan, Shanimandir, Kopargoan",
     "password": "1234",
     "id": 1
-  },
-  {
-    "name": "Vikas Babanrao Nere",
-    "mobile": "8888074775",
-    "age": "48",
-    "gender": "Male",
-    "occupation": "Tailor",
-    "address": "Jijamata Udyan, Shanimandir, Kopargoan",
-    "password": "1234",
-    "id": 2
   }
 ]

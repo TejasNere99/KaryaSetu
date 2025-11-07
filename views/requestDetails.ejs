@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Request Details | KaryaSetu</title>
+  <link rel="stylesheet" href="/requestDetails.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Request Details</h1>
+
+    <div class="details-card">
+      <h2>Work Description</h2>
+      <p>
+        <%= request.description %>
+      </p>
+
+      <div class="info-grid">
+        <div><strong>Location:</strong>
+          <%= request.location %>
+        </div>
+        <div><strong>Work Time:</strong>
+          <%= request.workTime %>
+        </div>
+        <div><strong>Duration:</strong>
+          <%= request.duration %>
+        </div>
+        <div><strong>Preferred Hours:</strong>
+          <%= request.preferredHours %>
+        </div>
+        <div><strong>Materials:</strong>
+          <%= request.materials %>
+        </div>
+        <div><strong>Urgency:</strong>
+          <%= request.urgency %>
+        </div>
+        <div><strong>Budget:</strong> ₹<%= request.budget %>
+        </div>
+        <div><strong>Payment Method:</strong>
+          <%= request.paymentMethod %>
+        </div>
+        <div><strong>Status:</strong>
+          <%= request.status %>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a href="http://localhost:3000/<%= type %>/<%= type === 'user' ? request.userId : request.workerId %>"
+          class="btn back">
+          ← Back to Requests
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

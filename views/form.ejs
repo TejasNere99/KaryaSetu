@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KaryaSetu Work Request Form</title>
+    <link rel="stylesheet" href="/form.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Work Request Form</h2>
+
+        <form id="workForm" action="/submitWorkRequest" method="POST">
+            <input type="hidden" name="userId" id="userId">
+            <input type="hidden" name="workerId" id="workerId" value="<%= workerId %>">
+
+            <h3>Basic Job Details</h3>
+            <div class="form-group">
+                <label class="question">Please describe the problem or work needed:</label>
+                <textarea name="description" rows="3" required
+                    placeholder="e.g. Light not working in kitchen, need painting for one room"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="question">Where is the work location?</label>
+                <input name="location" required type="text" placeholder="Address / Landmark / City / Pin code">
+            </div>
+
+            <h3>Time & Duration</h3>
+            <div class="form-group">
+                <label class="question">When do you want the work to be done?</label>
+                <select name="workTime" required>
+                    <option>Immediately</option>
+                    <option>Within 1 day</option>
+                    <option>Within 1 week</option>
+                    <option>Specific date & time</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="question">Estimated duration of work:</label>
+                <select name="duration" required>
+                    <option>Few hours</option>
+                    <option>Half day</option>
+                    <option>Full day</option>
+                    <option>Multiple days</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="question">Preferred working hours:</label>
+                <select name="preferredHours" required>
+                    <option>Morning</option>
+                    <option>Afternoon</option>
+                    <option>Evening</option>
+                    <option>Anytime</option>
+                </select>
+            </div>
+
+            <h3>Work Requirements</h3>
+            <div class="form-group">
+                <label class="question">Materials/tools:</label>
+                <select name="materials" required>
+                    <option>I will provide</option>
+                    <option>Worker should bring</option>
+                    <option>Not sure</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="question">How urgent is the work?</label>
+                <select name="urgency" required>
+                    <option>Normal</option>
+                    <option>Urgent</option>
+                    <option>Emergency</option>
+                </select>
+            </div>
+
+            <h3>Payment Information</h3>
+            <div class="form-group">
+                <label class="question">Expected budget / rate (if any):</label>
+                <input name="budget" type="text" placeholder="Enter amount">
+            </div>
+
+            <div class="form-group">
+                <label class="question">Preferred payment method:</label>
+                <select name="paymentMethod">
+                    <option>Cash</option>
+                    <option>UPI</option>
+                    <option>Bank transfer</option>
+                    <option>Either</option>
+                </select>
+            </div>
+
+            <input type="submit" value="Submit Request"
+                style="display: block; margin: 20px auto; padding: 10px 25px; background-color: #007bff; color: white; border: none; border-radius: 8px; cursor: pointer;">
+        </form>
+    </div>
+
+    <script>
+        // Get workerId from URL & userId from localStorage
+        const urlParams = new URLSearchParams(window.location.search);
+        // const workerId = urlParams.get('workerId');
+        const userId = localStorage.getItem('userId');
+
+        if (!userId) {
+            alert('Please login first!');
+            window.location.href = '/';
+        }
+
+        // document.getElementById('workerId').value = workerId;
+        document.getElementById('userId').value = userId;
+
+        document.getElementById('workForm').addEventListener('submit', () => {
+            alert('Request submitted successfully!');
+        });
+        console.log("workerId:", "<%= workerId %>");
+        console.log("userId:", userId);
+    </script>
+</body>
+
+</html>

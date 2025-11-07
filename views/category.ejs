@@ -1,89 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= category %> - Workers</title>
+  <title>
+    <%= category %> - Workers
+  </title>
   <link rel="stylesheet" href="/category.css">
 </head>
+
 <body>
-  <h1><%= category %> Workers</h1>
+  <a href="http://localhost:3000/"
+          class="btn-back">
+          ← Back
+  </a>
+  <h1>
+    <%= category %> Workers
+  </h1>
   <div class="worker-grid">
-    <% if(workers.length === 0){ %>
+    <% if(workers.length===0){ %>
       <p>No workers available in this category yet.</p>
-    <% } else { %>
-      <% workers.forEach(w => { %>
-        <div class="card">
-          <div class="card-image">
-            <% if(w.img && w.img !== ""){ %>
-              <img src="<%= w.img %>" alt="<%= w.name %>">
-            <% } else { %>
-              <div class="default-icon">👷</div>
+      <% } else { %>
+        <% workers.forEach(w=> { %>
+          <div class="card">
+            <div class="card-image">
+              <% if(w.img && w.img !=="" ){ %>
+                <img src="<%= w.img %>" alt="<%= w.name %>">
+                <% } else { %>
+                  <div class="default-icon">👷</div>
+                  <% } %>
+            </div>
+            <div class="card-content">
+              <h3>
+                <%= w.name %>
+              </h3>
+              <p class="subcategory">
+                <%= w.subcategory %>
+              </p>
+              <p><strong>Age:</strong>
+                <%= w.age %>
+              </p>
+              <p><strong>Experience:</strong>
+                <%= w.experience %> years
+              </p>
+              <p><strong>Address:</strong>
+                <%= w.address %>
+              </p>
+            </div>
+            <div class="action-buttons">
+              <form action="/send-request/<%=w.id%>">
+                <button class="hire-btn send-request-btn" data-worker-id="<%= w.id %>">Send Request</button>
+              </form>
+              <form class="message-form" method="get">
+                <button type="submit" class="hire-btn message-me-btn" data-worker-id="<%= w.id %>">
+                  Message Me
+                </button>
+              </form>
+            </div>
+          </div>
+          <% }) %>
             <% } %>
-          </div>
-          <div class="card-content">
-            <h3><%= w.name %></h3>
-            <p class="subcategory"><%= w.subcategory %></p>
-            <p><strong>Mobile:</strong> <%= w.mobile %></p>
-            <p><strong>Age:</strong> <%= w.age %></p>
-            <p><strong>Experience:</strong> <%= w.experience %> years</p>
-            <p><strong>Address:</strong> <%= w.address %></p>
-          </div>
-          <div class="action-buttons">
-            <button class="hire-btn send-request-btn" data-worker-id="<%= w.id %>">Send Request</button>
-            <button class="hire-btn message-me-btn" data-worker-id="<%= w.id %>">Message Me</button>
-          </div>
-        </div>
-      <% }) %>
-    <% } %>
   </div>
-
   <script>
-    let userId = null;
-    try {
-      userId = parseInt(localStorage.getItem('userId'));
-    } catch (e) {}
+  // Check login status
+  let userId = null;
+  try {
+    userId = parseInt(localStorage.getItem('userId'));
+  } catch (e) {
+    console.error("Error getting userId:", e);
+  }
 
-    document.querySelectorAll('.send-request-btn').forEach(btn => {
-      btn.addEventListener('click', async (e) => {
-        if (!userId) {
-          alert('Login required to send request');
-          return;
-        }
-        const workerId = parseInt(e.target.dataset.workerId);
-        try {
-          const response = await fetch('/sendRequest', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId, workerId })
-          });
-          const result = await response.text();
-          alert(result);
-        } catch (error) {
-          alert('Error sending request');
-        }
-      });
-    });
+  const messageForms = document.querySelectorAll('.message-form');
 
-    document.querySelectorAll('.message-me-btn').forEach(btn => {
-      btn.addEventListener('click', async (e) => {
-        if (!userId) {
-          alert('Login required to message');
-          return;
-        }
-        const workerId = parseInt(e.target.dataset.workerId);
-        // First send request if not already
-        try {
-          await fetch('/sendRequest', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId, workerId })
-          });
-        } catch (e) {}
-        // Then open chat
-        window.open(`/chat/${userId}/${workerId}/user`, '_blank');
+  messageForms.forEach(form => {
+    const workerId = form.querySelector('.message-me-btn').getAttribute('data-worker-id');
+
+    // If logged in → set chat route
+    if (userId) {
+      form.setAttribute('action', `/chat/${userId}/${workerId}/user`);
+    } 
+    // If not logged in → show alert and redirect
+    else {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault(); // stop form submit
+        alert("⚠️ Please login to continue");
+        window.location.href = "/mainLogin.html";
       });
-    });
-  </script>
+    }
+  });
+</script>
+
 </body>
+
 </html>

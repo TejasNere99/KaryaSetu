@@ -149,83 +149,37 @@ align-items: flex-start;
 .footer-box a{
     margin-top: 1.5rem;
 }
-/* Footer Styles */
-/* .footer {
-  background: #222;
-  color: #ddd;
-  padding: 40px 20px 20px;
-  font-family: Arial, sans-serif;
-}
+.btn-back {
+      position: fixed;
+      /* Har page pe same jagah rahe */
+      top: 20px;
+      /* Thoda top se gap */
+      left: 20px;
+      /* Left corner */
+      background-color: #007bff;
+      /* Button color (blue) */
+      color: white;
+      /* Text color */
+      padding: 10px 18px;
+      /* Button spacing */
+      border-radius: 8px;
+      /* Rounded corners */
+      text-decoration: none;
+      /* No underline */
+      font-weight: 500;
+      /* Thoda bold text */
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      /* Soft shadow */
+      transition: all 0.2s ease;
+      /* Smooth hover effect */
+      z-index: 1000;
+      /* Upar rahe sab elements ke */
+    }
 
-.footer-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 30px;
-  max-width: 1100px;
-  margin: auto;
-}
-
-.footer-box h3 {
-  color: #4CAF50;
-  margin-bottom: 15px;
-}
-
-.footer-box p,
-.footer-box li,
-.footer-box a {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #bbb;
-  text-decoration: none;
-}
-
-.footer-box ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-box li {
-  margin-bottom: 8px;
-}
-
-.footer-box a:hover {
-  color: #fff;
-}
-
-.social a {
-  margin-right: 10px;
-  font-size: 18px;
-  color: #bbb;
-  transition: 0.3s;
-}
-
-.social a:hover {
-  color: #4CAF50;
-}
-
-.footer-bottom {
-  text-align: center;
-  margin-top: 20px;
-  padding-top: 15px;
-  border-top: 1px solid #444;
-  font-size: 13px;
-  color: #aaa;
-}
-
-.social_icon {
-  height: 30px;
-  width: 30px;
-}
-
-  .social_icon{
-    height: 30px;
-    width:30px;
-  }
-
-  .social_content{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:5px;
-
-} */
+    .btn-back:hover {
+      background-color: #0056b3;
+      /* Darker blue on hover */
+      transform: scale(1.05);
+      /* Slight zoom effect */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
